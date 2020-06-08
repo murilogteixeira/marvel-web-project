@@ -1,0 +1,43 @@
+<!doctype html>
+<html th:fragment="layout (template, menu)">
+<head>
+    <title>Marvel Quiz</title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/home-style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/Style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li th:class="${activeTab == 'home'} ? active : null">
+                    <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+                </li>
+                <li th:class="${activeTab == 'characters'} ? active : null">
+                    <a href="/characters" ><span class="glyphicon glyphicon-user"></span> Characters</a>
+                </li>
+                <li th:class="${activeTab == 'comics'} ? active : null">
+                    <a href="/comics" ><span class="glyphicon glyphicon-book"></span> Comics</a>
+                </li>
+                <li th:class="${activeTab == 'events'} ? active : null">
+                    <a href="/events" class="glyphicon glyphicon-list-alt"></span> Events</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-right">
+                    <a href="https://canaltech.com.br/redes-sociais/o-que-e-login/"><span class="glyphicon glyphicon-book"></span> Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div th:replace="${template}"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>

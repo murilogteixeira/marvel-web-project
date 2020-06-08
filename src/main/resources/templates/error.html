@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'error')}">
+
+  <body>
+    <div class="container">
+      <p th:text="${message != ''} ? ${message} : 'Page not found'">Exception message</p>
+    </div>
+  </body>
+
+</html>

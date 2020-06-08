@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'comic-presentation')}">
+
+  <body>
+    <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="divCenter">Comic Presentation</h1>
+            <p>The best comics from Marvel Universe.</p>
+            <br>
+            <ul th:each="record : ${records}">
+              <div class="card">
+                <div class="container-fluid">
+                  <br>
+                  <div class="row">
+                    <div class="divCenter">
+                      <h4> Title: </h4>
+                      <li th:text="${record.title}"/>
+                      <br>
+                      <!-- <h4> On Sale Date: </h4>
+                       <div th:if="${not #lists.isEmpty(records.date)}">
+                        <ul th:each="date : ${records.date}">
+                          <div th:if="${date.type == 'onsaleDate'}">
+                            <li th:text="${date.date}"/>
+                          </div>
+                        </ul>
+                      </div> -->
+                      <br>
+                    </div>
+                    <div class="divCenter">
+                      <img th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}"/>
+                    </div>
+                    <br>
+                  </div>
+                  <br>
+                </div>
+              </div>
+              <br>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="cardHomeBottom">
+            <div class="row">
+              <div class="col-sm-4">
+                <h2>Heroes</h2>
+                <p>Get to know marvel heroes better.</p>
+              </div>
+              <div class="col-sm-4">
+                <h2>History</h2>
+                <p>Learn a little more about the story of Marvel's most acclaimed heroes.</p>
+             </div>
+              <div class="col-sm-4">
+                <h2>Comics</h2>
+                <p>Discover new things about this great universe.</p>
+              </div>
+            </div>
+         </div>
+  
+        <hr>
+  
+        <footer>
+          <p>© Grupo Pagumu</p>
+        </footer>
+  
+      </div>
+  </body>

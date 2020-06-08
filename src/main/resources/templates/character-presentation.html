@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}">
+
+  <body>
+    <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h1>Character Presentation</h1>
+            <p>The best heroes from Marvel Universe.</p>
+            <br>
+            <ul th:each="record : ${records}">
+              <div class="card">
+                <div class="container-fluid">
+                  <br>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <img th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}"/>
+                    </div>
+                    <div class="col-sm-8">
+                      <h4> ID: </h4>
+                      <li th:text="${record.id}"/>
+                      <br>
+                      <h4> Nome: </h4>
+                      <li th:text="${record.name}"/>
+                    </div>
+                    <div class="col-sm-2">
+                      <h4> Description: </h4>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                      <li th:text="${record.description}"/>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+              </div>
+              <br>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="cardHomeBottom">
+            <div class="row">
+              <div class="col-sm-4">
+                <h2>Heroes</h2>
+                <p>Get to know marvel heroes better.</p>
+              </div>
+              <div class="col-sm-4">
+                <h2>History</h2>
+                <p>Learn a little more about the story of Marvel's most acclaimed heroes.</p>
+             </div>
+              <div class="col-sm-4">
+                <h2>Curiosities</h2>
+                <p>Discover new things about this great universe.</p>
+              </div>
+            </div>
+         </div>
+  
+        <hr>
+  
+        <footer>
+          <p>© Grupo Pagumu</p>
+        </footer>
+  
+      </div>
+  </body>
