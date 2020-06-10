@@ -12,6 +12,7 @@ import com.marvelquiz.bean.character.Personagem;
 import com.marvelquiz.bean.Pessoa;
 import com.marvelquiz.bean.character.ResultsCharacter;
 import com.marvelquiz.bean.comics.Comics;
+import com.marvelquiz.bean.comics.Items;
 import com.marvelquiz.bean.comics.ResultsComics;
 import com.marvelquiz.bean.events.Events;
 import com.marvelquiz.bean.events.ResultsEvent;
@@ -68,21 +69,22 @@ public class MainController {
     public String comicsPresentation(Map<String, Object> model) {
         model.put("activeTab", "comics");
         ArrayList<ResultsComics> resultados = getComicsResults();
-        // String[] dataLancamento = new String[resultados.size()];
+        ArrayList<String> creatorsArray = new ArrayList<String>();
         model.put("records", resultados);
 
-        // int count = 0;
-        // for(ResultsComics comics : resultados){
-        //     ArrayList<DateComic> dateComics = comics.getDate();
-        //     if (dateComics != null){
-        //         for(DateComic dt : dateComics){
-        //             if (dt.getType() == "onsaleDate"){
-        //                 dataLancamento[count] = dt.getDate();
-        //             }
-        //         }
-        //         count++;
-        //     }
-        // } 
+        for (ResultsComics resultado : resultados) {
+            ArrayList<Items> items = resultado.getCreators().getItems();
+
+            if (items.size() == 0) {
+                creatorsArray.add("Unknown author");
+            } else {
+                for (Items item : items) {
+                    creatorsArray.add(item.getName());
+                }
+            }
+        }
+
+        System.out.println("Creadores: " + creatorsArray);
 
         // model.put("date", dataLancamento);
         return "comic-presentation";
@@ -154,7 +156,7 @@ public class MainController {
         .queryParam("format", "comic")
         .queryParam("noVariants", "true")
         .queryParam("limit", limite)
-        .queryParam("offset", randomInt(limite, total))
+        // .queryParam("offset", randomInt(limite, total))
         .queryParam("ts", ts)
         .queryParam("apikey", publicKey)
         .queryParam("hash", hashMD5).build();
