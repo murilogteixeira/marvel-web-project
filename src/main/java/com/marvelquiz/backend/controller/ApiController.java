@@ -146,7 +146,7 @@ public class ApiController {
                 for(int i = 0; i < limit.get(); i++) {
                     int index = new Random().nextInt(size);
                     Comic c = entity.getBody().getData().getResults().get(index);
-                    if(comics.contains(c)) {
+                    if(comics.contains(c) || c.getCreators().getItems().get(0).getName().contains("") || c.getCreators().getItems().get(0).getName().contains(" ")) {
                         i--;
                     } else {
                         comics.add(c);
@@ -191,7 +191,7 @@ public class ApiController {
                 for(int i = 0; i < limit.get(); i++) {
                     int index = new Random().nextInt(size);
                     Event e = entity.getBody().getData().getResults().get(index);
-                    if(events.contains(e)) {
+                    if(events.contains(e) || e.getDescription().contains("")) {
                         i--;
                     } else {
                         events.add(e);
