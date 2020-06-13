@@ -63,13 +63,11 @@ public class ApiController {
 
     final String eventsRequestMapping = "/api/events";
     @RequestMapping(value = eventsRequestMapping, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> events() {
+    public ResponseEntity<String> events(Optional<Integer> limit) {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         System.out.println(ts + " Request : " + eventsRequestMapping);
         
-        eventsReturn.setData(getEvents(5, 75));
-
-        String json = new Gson().toJson(eventsReturn);
+        String json = new Gson().toJson(getEvents(limit));
 
         return new ResponseEntity<String>(json, HttpStatus.OK);
     }
@@ -138,65 +136,78 @@ public class ApiController {
 
         UriComponents uri = uriBuilder.build();
 
-            try {
-                RestTemplate template = new RestTemplate();
-                ResponseEntity<MarvelReturnWithComic> entity;
-                entity = template.getForEntity(uri.toUriString(), MarvelReturnWithComic.class);
+        try {
+            RestTemplate template = new RestTemplate();
+            ResponseEntity<MarvelReturnWithComic> entity;
+            entity = template.getForEntity(uri.toUriString(), MarvelReturnWithComic.class);
 
-                if(limit.isPresent()) {
-                    ArrayList<Comic> comics = new ArrayList<>();
-                    int size = entity.getBody().getData().getResults().size();
-                    for(int i = 0; i < limit.get(); i++) {
-                        int index = new Random().nextInt(size);
-                        Comic c = entity.getBody().getData().getResults().get(index);
-                        if(comics.contains(c)) {
-                            i--;
-                        } else {
-                            comics.add(c);
-                        }
+            if(limit.isPresent()) {
+                ArrayList<Comic> comics = new ArrayList<>();
+                int size = entity.getBody().getData().getResults().size();
+                for(int i = 0; i < limit.get(); i++) {
+                    int index = new Random().nextInt(size);
+                    Comic c = entity.getBody().getData().getResults().get(index);
+                    if(comics.contains(c)) {
+                        i--;
+                    } else {
+                        comics.add(c);
                     }
-                    entity.getBody().getData().setResults(comics);
                 }
-
-                HttpStatus status = entity.getStatusCode();
-                System.out.println(ts + " " + status);
-                return entity.getBody().getData();
-            } catch (RestClientException e) {
-                RestClientError error = errorMessageToRestClientError(e.getMessage());
-                System.out.println(error);
-                comicsReturn.setError(error);
-                return null;
+                entity.getBody().getData().setResults(comics);
             }
+
+            HttpStatus status = entity.getStatusCode();
+            System.out.println(ts + " " + status);
+            return entity.getBody().getData();
+        } catch (RestClientException e) {
+            RestClientError error = errorMessageToRestClientError(e.getMessage());
+            System.out.println(error);
+            comicsReturn.setError(error);
+            return null;
+        }
     }
 
-    private DataReturn<Event> getEvents(int limite, int total) {
+    private DataReturn<Event> getEvents(Optional<Integer> limit) {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         c.setTs(ts);
 
-        UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("https")
-        .host("gateway.marvel.com").port(443)        
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance()
+        .scheme("https").host("gateway.marvel.com").port(443)        
         .path("v1/public/events")
-        .queryParam("limit", limite)
-        .queryParam("offset", randomInt(limite, total))
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
-        .build();
+        .queryParam("limit", 75);
+
+        UriComponents uri = uriBuilder.build();
 
         try {
             RestTemplate template = new RestTemplate();
             ResponseEntity<MarvelReturnWithEvent> entity;
             entity = template.getForEntity(uri.toUriString(), MarvelReturnWithEvent.class);
+
+            if(limit.isPresent()) {
+                ArrayList<Event> events = new ArrayList<>();
+                int size = entity.getBody().getData().getResults().size();
+                for(int i = 0; i < limit.get(); i++) {
+                    int index = new Random().nextInt(size);
+                    Event e = entity.getBody().getData().getResults().get(index);
+                    if(events.contains(e)) {
+                        i--;
+                    } else {
+                        events.add(e);
+                    }
+                }
+                entity.getBody().getData().setResults(events);
+            }
+
             HttpStatus status = entity.getStatusCode();
             System.out.println(ts + " " + status);
-            eventsReturn.setStatus(status);
-            eventsReturn.setError(null);
             return entity.getBody().getData();
         } catch (RestClientException e) {
             RestClientError error = errorMessageToRestClientError(e.getMessage());
             System.out.println(error);
-            eventsReturn.setError(error);
+            comicsReturn.setError(error);
             return null;
         }
     }

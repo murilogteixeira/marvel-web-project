@@ -9,11 +9,11 @@ import java.util.Random;
 
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
 import com.marvelquiz.backend.model.comics.DataReturnWithComic;
+import com.marvelquiz.backend.model.events.DataReturnWithEvent;
 import com.marvelquiz.bean.character2.Character;
 import com.marvelquiz.bean.comics2.Items;
 import com.marvelquiz.bean.comics2.Comic;
-import com.marvelquiz.bean.events.Events;
-import com.marvelquiz.bean.events.ResultsEvent;
+import com.marvelquiz.bean.events2.Event;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -96,7 +96,7 @@ public class MainController {
     public String eventPresentation(Map<String, Object> model) {
         System.out.println("Request: " + eventsRequestMapping);
         model.put("activeTab", "events");
-        ArrayList<ResultsEvent> resultados = getEventResults();
+        ArrayList<Event> resultados = getEventResults();
         model.put("records", resultados);
         return "event-presentation";
     }
@@ -164,40 +164,51 @@ public class MainController {
         }
     }
 
-    private ArrayList<ResultsEvent> getEventResults() {
+    private ArrayList<Event> getEventResults() {
         //limite de records por página
-        int limite = 5;
+        int limite = 10;
         //total de records na api
         int total = 75;
 
-        RestTemplate template = new RestTemplate();
+        // RestTemplate template = new RestTemplate();
 
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        String privateKey = "ded1f16e4c678b8817e21f3b79fda2ea2153900c";
-        String publicKey = "ab7fe0ebc4b57fc4cfd8c5cc155ec01c";
-        String hash = "" + ts + privateKey + publicKey;
-        String hashMD5 = md5(hash);
+        // Timestamp ts = new Timestamp(System.currentTimeMillis());
+        // String privateKey = "ded1f16e4c678b8817e21f3b79fda2ea2153900c";
+        // String publicKey = "ab7fe0ebc4b57fc4cfd8c5cc155ec01c";
+        // String hash = "" + ts + privateKey + publicKey;
+        // String hashMD5 = md5(hash);
 
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("https")
-        .host("gateway.marvel.com").port(443)        
-        .path("v1/public/events")
+        .scheme("http").host("localhost").port(5000)        
+        .path("/api/events")
         .queryParam("limit", limite)
-        .queryParam("offset", randomInt(limite, total))
-        .queryParam("ts", ts)
-        .queryParam("apikey", publicKey)
-        .queryParam("hash", hashMD5).build();
+        // .queryParam("offset", randomInt(limite, total))
+        .build();
+        // .queryParam("ts", ts)
+        // .queryParam("apikey", publicKey)
+        // .queryParam("hash", hashMD5).build();
 
-        String uriString = uri.toUriString();
+        // String uriString = uri.toUriString();
 
-        ResponseEntity<Events> entity = template.getForEntity(uriString, Events.class);
-        System.out.println(entity.getBody().getData().getResults().get(0).getThumbnail().getPath());
-        System.out.println(entity.getStatusCode());
+        // ResponseEntity<Events> entity = template.getForEntity(uriString, Events.class);
+        // System.out.println(entity.getBody().getData().getResults().get(0).getThumbnail().getPath());
+        // System.out.println(entity.getStatusCode());
 
 
-        ArrayList<ResultsEvent> resultados = entity.getBody().getData().getResults();
+        // ArrayList<ResultsEvent> resultados = entity.getBody().getData().getResults();
 
-        return resultados;
+        // return resultados;
+        try {
+            RestTemplate template = new RestTemplate();
+            ResponseEntity<DataReturnWithEvent> entity;
+            entity = template.getForEntity(uri.toUriString(), DataReturnWithEvent.class);
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            System.out.println(ts + " " + entity.getStatusCode());
+            return entity.getBody().getResults();
+        } catch (RestClientException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     private String md5(String texto) {
