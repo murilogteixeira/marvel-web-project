@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.Random;
 
 import com.google.gson.Gson;
-import com.marvelquiz.backend.model.ApiReturn;
 import com.marvelquiz.backend.model.Credenciais;
 import com.marvelquiz.backend.model.DataReturn;
 import com.marvelquiz.backend.model.character.MarvelReturnWithCharacter;
@@ -34,9 +33,9 @@ public class ApiController {
 
     Credenciais c = new Credenciais();
 
-    ApiReturn<Character> charactersReturn = new ApiReturn<>();
-    ApiReturn<Comic> comicsReturn = new ApiReturn<>();
-    ApiReturn<Event> eventsReturn = new ApiReturn<>();
+    // ApiReturn<Character> charactersReturn = new ApiReturn<>();
+    // ApiReturn<Comic> comicsReturn = new ApiReturn<>();
+    // ApiReturn<Event> eventsReturn = new ApiReturn<>();
 
     final String characterRequestMapping = "/api/characters";
     @RequestMapping(value = characterRequestMapping, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -114,7 +113,7 @@ public class ApiController {
         } catch (RestClientException e) {
             RestClientError error = errorMessageToRestClientError(e.getMessage());
             System.out.println(error);
-            charactersReturn.setError(error);
+            // charactersReturn.setError(error);
             return null;
         }
     }
@@ -162,7 +161,7 @@ public class ApiController {
         } catch (RestClientException e) {
             RestClientError error = errorMessageToRestClientError(e.getMessage());
             System.out.println(error);
-            comicsReturn.setError(error);
+            // comicsReturn.setError(error);
             return null;
         }
     }
@@ -207,7 +206,7 @@ public class ApiController {
         } catch (RestClientException e) {
             RestClientError error = errorMessageToRestClientError(e.getMessage());
             System.out.println(error);
-            comicsReturn.setError(error);
+            // comicsReturn.setError(error);
             return null;
         }
     }

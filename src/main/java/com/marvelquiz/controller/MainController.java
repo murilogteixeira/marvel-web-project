@@ -1,11 +1,8 @@
 package com.marvelquiz.controller;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
 
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
 import com.marvelquiz.backend.model.comics.DataReturnWithComic;
@@ -106,7 +103,7 @@ public class MainController {
 
     private ArrayList<Character> getCharacters() {
         int limite = 10;
-        int total = 1493;
+        // int total = 1493;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme(scheme).host(host)
@@ -133,7 +130,7 @@ public class MainController {
         //limite de records por página
         int limite = 10;
         //total de records na api
-        int total = 70000;
+        // int total = 70000;
         
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme(scheme).host(host)
@@ -158,7 +155,7 @@ public class MainController {
         //limite de records por página
         int limite = 10;
         //total de records na api
-        int total = 75;
+        // int total = 75;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme(scheme).host(host)
@@ -178,22 +175,6 @@ public class MainController {
             System.out.println(e);
             return null;
         }
-    }
-
-    private String md5(String texto) {
-        try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            md5.update(texto.getBytes(), 0, texto.length());
-            return new BigInteger(1, md5.digest()).toString(16);
-        } catch (Exception e) {
-            return "error";
-        }
-    }
-    
-    private int randomInt(int limite, int total){
-        int intervalo = total / limite;
-        Random ran = new Random();
-        return ran.nextInt(intervalo);
     }
 
 }
