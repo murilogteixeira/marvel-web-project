@@ -3,6 +3,7 @@ package com.marvelquiz.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
 import com.marvelquiz.backend.model.comics.DataReturnWithComic;
@@ -63,7 +64,7 @@ public class MainController {
     public String chacarterPresentation(Map<String, Object> model) {
         System.out.println("Request: " + characterRequestMapping);
         model.put("activeTab", "characters");
-        ArrayList<ResultsCharacter> resultados = getCharacterResults(5, 1000);
+        ArrayList<Character> resultados = getCharacters(5, 1000);
         model.put("records", resultados);
         return "character-presentation";
     }
@@ -73,7 +74,7 @@ public class MainController {
     public String comicsPresentation(Map<String, Object> model) {
         System.out.println("Request: " + comicsRequestMapping);
         model.put("activeTab", "comics");
-        ArrayList<ResultsComics> resultados = getComicsResults(5, 70000);
+        ArrayList<Comic> resultados = getComicsResults(5, 70000);
         ArrayList<String> creatorsArray = new ArrayList<String>();
         model.put("records", resultados);
 
@@ -100,7 +101,7 @@ public class MainController {
     public String eventPresentation(Map<String, Object> model) {
         System.out.println("Request: " + eventsRequestMapping);
         model.put("activeTab", "events");
-        ArrayList<ResultsEvent> resultados = getEventResults(5, 75);
+        ArrayList<Event> resultados = getEventResults(5, 75);
         model.put("records", resultados);
         return "event-presentation";
     }
@@ -120,7 +121,7 @@ public class MainController {
 
         String pergunta = perguntas.getTitlePeriodoEvento();
 
-        ArrayList<ResultsEvent> events = getEventResults(4, 90);
+        ArrayList<Event> events = getEventResults(4, 90);
         String respostaCerta = "" + events.get(0).getStart() + " - " + events.get(0).getEnd(); 
 
         String conteudo = events.get(0).getTitle();
@@ -143,26 +144,16 @@ public class MainController {
         return quiz;
     }
 
-    private ArrayList<ResultsCharacter> getCharacterResults(int limite, int total) {
-        // //limite de records por página
-        // int limite = 5;
-        // //total de records na api
-        // int total = 1000;
-
-        RestTemplate template = new RestTemplate();
-
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        String privateKey = "ded1f16e4c678b8817e21f3b79fda2ea2153900c";
-        String publicKey = "ab7fe0ebc4b57fc4cfd8c5cc155ec01c";
-        String hash = "" + ts + privateKey + publicKey;
-        String hashMD5 = md5(hash);
+    private ArrayList<Character> getCharacters(int limite, int total) {
+        // int limite = 10;
+        // int total = 1493;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme(scheme).host(host)
         // .scheme("http").host("localhost").port(5000)
         .path("/api/characters")
         .queryParam("limit", limite)
-        // .queryParam("offset", randomInt(limite, total))
+        .queryParam("offset", randomInt(limite, total))
         .build();
 
         try {
@@ -178,10 +169,10 @@ public class MainController {
         }
     }
 
-    private ArrayList<ResultsComics> getComicsResults(int limite, int total) {
-        // //limite de records por página
-        // int limite = 5;
-        // //total de records na api
+    private ArrayList<Comic> getComicsResults(int limite, int total) {
+        //limite de records por página
+        // int limite = 10;
+        //total de records na api
         // int total = 70000;
         
         UriComponents uri = UriComponentsBuilder.newInstance()
@@ -190,29 +181,32 @@ public class MainController {
         .path("/api/comics")
         .queryParam("limit", limite)
         .queryParam("offset", randomInt(limite, total))
-        .queryParam("ts", ts)
-        .queryParam("apikey", publicKey)
-        .queryParam("hash", hashMD5).build();
-
-        String uriString = uri.toUriString();
-
-        ResponseEntity<Comics> entity = template.getForEntity(uriString, Comics.class);
-        System.out.println(entity.getBody().getData().getResults().get(0).getThumbnail().getPath());
-        System.out.println(entity.getStatusCode());
-
-
-        ArrayList<ResultsComics> resultados = entity.getBody().getData().getResults();
-
-        return resultados;
+        .build();
+        try {
+            RestTemplate template = new RestTemplate();
+            ResponseEntity<DataReturnWithComic> entity;
+            entity = template.getForEntity(uri.toUriString(), DataReturnWithComic.class);
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            System.out.println(ts + " " + entity.getStatusCode());
+            return entity.getBody().getResults();
+        } catch (RestClientException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
-    private ArrayList<ResultsEvent> getEventResults(int limite, int total) {
+    private ArrayList<Event> getEventResults(int limite, int total) {
+        //limite de records por página
+        // int limite = 10;
+        //total de records na api
+        // int total = 75;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme(scheme).host(host)
         // .scheme("http").host("localhost").port(5000)     
         .path("/api/events")
         .queryParam("limit", limite)
+        .queryParam("offset", randomInt(limite, total))
         .build();
 
         try {
@@ -226,6 +220,12 @@ public class MainController {
             System.out.println(e);
             return null;
         }
+    }
+
+    private int randomInt(int limite, int total){
+        int intervalo = total / limite;
+        Random ran = new Random();
+        return ran.nextInt(intervalo);
     }
 
 }
