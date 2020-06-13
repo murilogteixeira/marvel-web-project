@@ -14,7 +14,9 @@
         <br>
 
         <div th:if="${quiz.conteudoIsImage} == true">
-            <img th:src="${quiz.conteudo}"/>
+            <div class="cardHomeBottom">
+                <img th:src="${quiz.conteudo}"/>
+            </div>
         </div>
         <div th:if="${quiz.conteudoIsImage} == false">
             <h4>
