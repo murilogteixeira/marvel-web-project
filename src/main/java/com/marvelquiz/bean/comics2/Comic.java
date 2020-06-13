@@ -9,9 +9,18 @@ public class Comic {
     private String title;
     private ArrayList<ComicDate> date;
     private Thumbnail thumbnail;
+    private Creators creators;
 
     public int getId() {
         return id;
+    }
+
+    public Creators getCreators() {
+        return creators;
+    }
+
+    public void setCreators(Creators creators) {
+        this.creators = creators;
     }
 
     public ArrayList<ComicDate> getDate() {

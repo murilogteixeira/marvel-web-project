@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
-import com.marvelquiz.bean.comics.Comics;
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
+import com.marvelquiz.backend.model.comics.DataReturnWithComic;
 import com.marvelquiz.bean.character2.Character;
-import com.marvelquiz.bean.comics.ResultsComics;
+import com.marvelquiz.bean.comics2.Items;
+import com.marvelquiz.bean.comics2.Comic;
 import com.marvelquiz.bean.events.Events;
 import com.marvelquiz.bean.events.ResultsEvent;
 
@@ -68,10 +69,25 @@ public class MainController {
     public String comicsPresentation(Map<String, Object> model) {
         System.out.println("Request: " + comicsRequestMapping);
         model.put("activeTab", "comics");
-        ArrayList<ResultsComics> resultados = getComicsResults();
-
+        ArrayList<Comic> resultados = getComicsResults();
+        ArrayList<String> creatorsArray = new ArrayList<String>();
         model.put("records", resultados);
 
+        for (Comic resultado : resultados) {
+            ArrayList<Items> items = resultado.getCreators().getItems();
+
+            if (items.size() == 0) {
+                creatorsArray.add("Unknown author");
+            } else {
+                for (Items item : items) {
+                    creatorsArray.add(item.getName());
+                }
+            }
+        }
+
+        // System.out.println("Creadores: " + creatorsArray);
+
+        // model.put("date", dataLancamento);
         return "comic-presentation";
     }
 
@@ -90,9 +106,10 @@ public class MainController {
         int total = 1493;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("http").host("localhost").port(5000).path("/api/characters")
+        .scheme("http").host("localhost").port(5000)
+        .path("/api/characters")
         .queryParam("limit", limite)
-        .queryParam("offset", randomInt(limite, total))
+        // .queryParam("offset", randomInt(limite, total))
         .build();
 
         try {
@@ -108,42 +125,43 @@ public class MainController {
         }
     }
 
-    private ArrayList<ResultsComics> getComicsResults() {
+    private ArrayList<Comic> getComicsResults() {
         //limite de records por página
-        int limite = 5;
+        int limite = 10;
         //total de records na api
         int total = 70000;
         
-        RestTemplate template = new RestTemplate();
-
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        String privateKey = "ded1f16e4c678b8817e21f3b79fda2ea2153900c";
-        String publicKey = "ab7fe0ebc4b57fc4cfd8c5cc155ec01c";
-        String hash = "" + ts + privateKey + publicKey;
-        String hashMD5 = md5(hash);
-
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("https")
-        .host("gateway.marvel.com").port(443)        
-        .path("v1/public/comics")
-        .queryParam("format", "comic")
-        .queryParam("noVariants", "true")
+        .scheme("http").host("localhost").port(5000)
+        .path("/api/comics")
         .queryParam("limit", limite)
-        .queryParam("offset", randomInt(limite, total))
-        .queryParam("ts", ts)
-        .queryParam("apikey", publicKey)
-        .queryParam("hash", hashMD5).build();
+        .build();
+        // .queryParam("offset", randomInt(limite, total))
+        // .queryParam("ts", ts)
+        // .queryParam("apikey", publicKey)
+        // .queryParam("hash", hashMD5).build();
 
-        String uriString = uri.toUriString();
+        // String uriString = uri.toUriString();
 
-        ResponseEntity<Comics> entity = template.getForEntity(uriString, Comics.class);
-        System.out.println(entity.getBody().getData().getResults().get(0).getThumbnail().getPath());
-        System.out.println(entity.getStatusCode());
+        // ResponseEntity<Comics> entity = template.getForEntity(uriString, Comics.class);
+        // System.out.println(entity.getBody().getData().getResults().get(0).getThumbnail().getPath());
+        // System.out.println(entity.getStatusCode());
 
 
-        ArrayList<ResultsComics> resultados = entity.getBody().getData().getResults();
+        // ArrayList<ResultsComics> resultados = entity.getBody().getData().getResults();
 
-        return resultados;
+        // return resultados;
+        try {
+            RestTemplate template = new RestTemplate();
+            ResponseEntity<DataReturnWithComic> entity;
+            entity = template.getForEntity(uri.toUriString(), DataReturnWithComic.class);
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            System.out.println(ts + " " + entity.getStatusCode());
+            return entity.getBody().getResults();
+        } catch (RestClientException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     private ArrayList<ResultsEvent> getEventResults() {

@@ -18,14 +18,15 @@
                       <h4> Title: </h4>
                       <li th:text="${record.title}"/>
                       <br>
-                      <!-- <h4> On Sale Date: </h4>
-                       <div th:if="${not #lists.isEmpty(records.date)}">
-                        <ul th:each="date : ${records.date}">
-                          <div th:if="${date.type == 'onsaleDate'}">
-                            <li th:text="${date.date}"/>
-                          </div>
+                      <h4> Author(s): </h4>
+                      <div th:if="${record.creators.items} != null and ${record.creators.items.isEmpty()} == false">
+                        <ul th:each="item : ${record.creators.items}">
+                          <li th:text="${item.name}"/>
                         </ul>
-                      </div> -->
+                      </div>
+                      <div th:if="${record.creators.items} == null or ${record.creators.items.isEmpty()} == true">
+                        <li th:text="UNKNOWN"/>
+                      </div>
                       <br>
                     </div>
                     <div class="divCenter">
