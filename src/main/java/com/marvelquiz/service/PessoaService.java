@@ -1,11 +1,11 @@
-package com.marvelquiz.bo;
+package com.marvelquiz.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.marvelquiz.bean.Pessoa;
-import com.marvelquiz.dao.PessoaRepository;
-import com.marvelquiz.bo.interfaces.PessoaServiceInterface;
+import com.marvelquiz.repository.PessoaRepository;
+import com.marvelquiz.service.interfaces.PessoaServiceInterface;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

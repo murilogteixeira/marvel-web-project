@@ -1,4 +1,4 @@
-package com.marvelquiz.dao;
+package com.marvelquiz.repository;
 
 import com.marvelquiz.bean.Pessoa;
 
