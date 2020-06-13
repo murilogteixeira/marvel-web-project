@@ -1,4 +1,4 @@
-package com.marvelquiz.bo.interfaces;
+package com.marvelquiz.service.interfaces;
 
 import java.util.List;
 import java.util.Optional;

@@ -9,8 +9,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.marvelquiz.bean.character.Personagem;
+import com.marvelquiz.service.PessoaService;
 import com.marvelquiz.bean.Pessoa;
-import com.marvelquiz.bo.PessoaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
