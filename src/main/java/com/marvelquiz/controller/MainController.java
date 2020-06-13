@@ -31,6 +31,9 @@ public class MainController {
     // @Autowired
     // private PessoaService service;
 
+    private String scheme = "https";
+    private String host = "marvel-web-project.herokuapp.com";
+
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
         model.put("activeTab", "home");
@@ -106,7 +109,8 @@ public class MainController {
         int total = 1493;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("http").host("localhost").port(5000)
+        .scheme(scheme).host(host)
+        // .scheme("http").host("localhost").port(5000)
         .path("/api/characters")
         .queryParam("limit", limite)
         // .queryParam("offset", randomInt(limite, total))
@@ -132,25 +136,11 @@ public class MainController {
         int total = 70000;
         
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("http").host("localhost").port(5000)
+        .scheme(scheme).host(host)
+        // .scheme("http").host("localhost").port(5000)
         .path("/api/comics")
         .queryParam("limit", limite)
         .build();
-        // .queryParam("offset", randomInt(limite, total))
-        // .queryParam("ts", ts)
-        // .queryParam("apikey", publicKey)
-        // .queryParam("hash", hashMD5).build();
-
-        // String uriString = uri.toUriString();
-
-        // ResponseEntity<Comics> entity = template.getForEntity(uriString, Comics.class);
-        // System.out.println(entity.getBody().getData().getResults().get(0).getThumbnail().getPath());
-        // System.out.println(entity.getStatusCode());
-
-
-        // ArrayList<ResultsComics> resultados = entity.getBody().getData().getResults();
-
-        // return resultados;
         try {
             RestTemplate template = new RestTemplate();
             ResponseEntity<DataReturnWithComic> entity;
@@ -170,34 +160,13 @@ public class MainController {
         //total de records na api
         int total = 75;
 
-        // RestTemplate template = new RestTemplate();
-
-        // Timestamp ts = new Timestamp(System.currentTimeMillis());
-        // String privateKey = "ded1f16e4c678b8817e21f3b79fda2ea2153900c";
-        // String publicKey = "ab7fe0ebc4b57fc4cfd8c5cc155ec01c";
-        // String hash = "" + ts + privateKey + publicKey;
-        // String hashMD5 = md5(hash);
-
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("http").host("localhost").port(5000)        
+        .scheme(scheme).host(host)
+        // .scheme("http").host("localhost").port(5000)     
         .path("/api/events")
         .queryParam("limit", limite)
-        // .queryParam("offset", randomInt(limite, total))
         .build();
-        // .queryParam("ts", ts)
-        // .queryParam("apikey", publicKey)
-        // .queryParam("hash", hashMD5).build();
 
-        // String uriString = uri.toUriString();
-
-        // ResponseEntity<Events> entity = template.getForEntity(uriString, Events.class);
-        // System.out.println(entity.getBody().getData().getResults().get(0).getThumbnail().getPath());
-        // System.out.println(entity.getStatusCode());
-
-
-        // ArrayList<ResultsEvent> resultados = entity.getBody().getData().getResults();
-
-        // return resultados;
         try {
             RestTemplate template = new RestTemplate();
             ResponseEntity<DataReturnWithEvent> entity;
