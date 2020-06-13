@@ -18,6 +18,9 @@ import com.marvelquiz.bean.events.Events;
 import com.marvelquiz.bean.events.ResultsEvent;
 import com.marvelquiz.bo.PessoaService;
 
+import com.marvelquiz.bean.quiz.PerguntasQuiz;
+import com.marvelquiz.bean.quiz.Quiz;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -60,7 +63,7 @@ public class MainController {
     @RequestMapping("/characters")
     public String chacarterPresentation(Map<String, Object> model) {
         model.put("activeTab", "characters");
-        ArrayList<ResultsCharacter> resultados = getCharacterResults();
+        ArrayList<ResultsCharacter> resultados = getCharacterResults(5, 1000);
         model.put("records", resultados);
         return "character-presentation";
     }
@@ -68,7 +71,7 @@ public class MainController {
     @RequestMapping("/comics")
     public String comicsPresentation(Map<String, Object> model) {
         model.put("activeTab", "comics");
-        ArrayList<ResultsComics> resultados = getComicsResults();
+        ArrayList<ResultsComics> resultados = getComicsResults(5, 70000);
         ArrayList<String> creatorsArray = new ArrayList<String>();
         model.put("records", resultados);
 
@@ -93,16 +96,54 @@ public class MainController {
     @RequestMapping("/events")
     public String eventPresentation(Map<String, Object> model) {
         model.put("activeTab", "events");
-        ArrayList<ResultsEvent> resultados = getEventResults();
+        ArrayList<ResultsEvent> resultados = getEventResults(5, 75);
         model.put("records", resultados);
         return "event-presentation";
     }
 
-    private ArrayList<ResultsCharacter> getCharacterResults() {
-        //limite de records por página
-        int limite = 5;
-        //total de records na api
-        int total = 1000;
+    @RequestMapping("/quiz")
+    public String quizPresentation(Map<String, Object> model){
+        model.put("activeTab", "quiz");
+
+        Quiz quiz = getQuizTitlePeriodoEvento();
+
+        model.put("quiz", quiz);
+        return "quiz-game";
+    }
+
+    private Quiz getQuizTitlePeriodoEvento(){
+        PerguntasQuiz perguntas = new PerguntasQuiz();
+
+        String pergunta = perguntas.getTitlePeriodoEvento();
+
+        ArrayList<ResultsEvent> events = getEventResults(4, 90);
+        String respostaCerta = "" + events.get(0).getStart() + " - " + events.get(0).getEnd(); 
+
+        String conteudo = events.get(0).getTitle();
+        boolean conteudoIsImage = false;
+
+        // ArrayList<ResultsEvent> eventosErrados = new ArrayList<ResultsEvent>();
+
+        // for(int i = 0; i < 3; i++){
+            // eventosErrados = getEventResults(3, 370);
+        // }
+
+        String respostasErradas[] = new String[] {
+            "" + events.get(1).getStart() + " - " + events.get(1).getEnd(),
+            "" + events.get(2).getStart() + " - " + events.get(2).getEnd(),
+            "" + events.get(3).getStart() + " - " + events.get(3).getEnd()
+        };
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+
+        return quiz;
+    }
+
+    private ArrayList<ResultsCharacter> getCharacterResults(int limite, int total) {
+        // //limite de records por página
+        // int limite = 5;
+        // //total de records na api
+        // int total = 1000;
 
         RestTemplate template = new RestTemplate();
 
@@ -135,11 +176,11 @@ public class MainController {
         return resultados;
     }
 
-    private ArrayList<ResultsComics> getComicsResults() {
-        //limite de records por página
-        int limite = 5;
-        //total de records na api
-        int total = 70000;
+    private ArrayList<ResultsComics> getComicsResults(int limite, int total) {
+        // //limite de records por página
+        // int limite = 5;
+        // //total de records na api
+        // int total = 70000;
         
         RestTemplate template = new RestTemplate();
 
@@ -156,7 +197,7 @@ public class MainController {
         .queryParam("format", "comic")
         .queryParam("noVariants", "true")
         .queryParam("limit", limite)
-        // .queryParam("offset", randomInt(limite, total))
+        .queryParam("offset", randomInt(limite, total))
         .queryParam("ts", ts)
         .queryParam("apikey", publicKey)
         .queryParam("hash", hashMD5).build();
@@ -173,11 +214,7 @@ public class MainController {
         return resultados;
     }
 
-    private ArrayList<ResultsEvent> getEventResults() {
-        //limite de records por página
-        int limite = 5;
-        //total de records na api
-        int total = 75;
+    private ArrayList<ResultsEvent> getEventResults(int limite, int total) {
 
         RestTemplate template = new RestTemplate();
 
