@@ -191,7 +191,7 @@ public class ApiController {
                 for(int i = 0; i < limit.get(); i++) {
                     int index = new Random().nextInt(size);
                     Event e = entity.getBody().getData().getResults().get(index);
-                    if(events.contains(e) || e.getStart().contains(null) || e.getStart().contains("null")) {
+                    if(events.contains(e) || e.getStart() == null || e.getStart().contains("null")) {
                         i--;
                     } else {
                         events.add(e);
