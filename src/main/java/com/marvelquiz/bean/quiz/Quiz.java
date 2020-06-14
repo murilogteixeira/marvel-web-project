@@ -3,17 +3,17 @@ package com.marvelquiz.bean.quiz;
 public class Quiz {
     private String pergunta;
     private String respostaCerta;
-    private String[] respostasErradas; // 3
+    private String[] respostas; // todas as respostas do quiz em questão
     // O conteúdo pode ser tanto uma imagem quanto uma frase ou nome
     // Convention: Tratar imagem como url (String), assim como frase/nome
     private String conteudo;
     private Boolean conteudoIsImage;
 
-    public Quiz(String pergunta, String respostaCerta, String[] respostasErradas, String conteudo,
+    public Quiz(String pergunta, String respostaCerta, String[] respostas, String conteudo,
             Boolean conteudoIsImage) {
         this.pergunta = pergunta;
         this.respostaCerta = respostaCerta;
-        this.respostasErradas = respostasErradas;
+        this.respostas = respostas;
         this.conteudo = conteudo;
         this.conteudoIsImage = conteudoIsImage;
     }
@@ -38,12 +38,12 @@ public class Quiz {
         this.conteudo = conteudo;
     }
 
-    public String[] getRespostasErradas() {
-        return respostasErradas;
+    public String[] getRespostas() {
+        return respostas;
     }
 
-    public void setRespostasErradas(String[] respostasErradas) {
-        this.respostasErradas = respostasErradas;
+    public void setRespostas(String[] respostas) {
+        this.respostas = respostas;
     }
 
     public String getRespostaCerta() {

@@ -15,6 +15,7 @@ import com.marvelquiz.bean.events2.Event;
 
 import com.marvelquiz.bean.quiz.PerguntasQuiz;
 import com.marvelquiz.bean.quiz.Quiz;
+import com.marvelquiz.bean.quiz.QuizResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class MainController {
 
     private String scheme = "https";
     private String host = "marvel-web-project.herokuapp.com";
+    private int quizCount = 0;
 
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
@@ -108,12 +110,61 @@ public class MainController {
 
     @RequestMapping("/quiz")
     public String quizPresentation(Map<String, Object> model){
-        model.put("activeTab", "quiz");
+        
+        if (quizCount == 8) {
+            quizCount = 0;
+            model.put("activeTab", "quiz");
 
-        Quiz quiz = getQuizTitlePeriodoEvento();
+            return "redirect:/result";
+        }
+        
+        model.put("activeTab", "quiz");
+        
+        Quiz quiz = null;
+
+        switch (quizCount) {
+            case 0:
+                quiz = getQuizImagemNomePersonagem();
+            break;
+            case 1:
+                quiz = getQuizTitlePeriodoEvento();
+            break;
+            case 2:
+                quiz = getQuizImagemTitleEvento();
+            break;
+            case 3:
+                quiz = getQuizDescricaoTitleEvento();
+            break;
+            case 4:
+                quiz = getQuizImagemComecoEvento();
+            break;
+            case 5:
+                quiz = getQuizDescricaoFinalEvento();
+            break;
+            case 6:
+                quiz = getQuizImageTitleComic();
+            break;
+            case 7:
+                quiz = getQuizTitleAutoresComic();
+            break;
+        }
 
         model.put("quiz", quiz);
+        quizCount++;
+        
         return "quiz-game";
+    }
+
+    @RequestMapping("/result")
+    public String resultPresentation(Map<String, Object> model) {
+        model.put("activeTab", "result");
+
+        QuizResult result = new QuizResult();
+
+        // Retrieve do banco
+
+        model.put("records", result);
+        return "quiz-result";
     }
 
     private Quiz getQuizImagemNomePersonagem(){
@@ -127,13 +178,16 @@ public class MainController {
         String conteudo = "" + character.get(0).getThumbnail().getPath() + "/portrait_incredible." + character.get(0).getThumbnail().getExtension();
         boolean conteudoIsImage = true;
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            character.get(0).getName(),
             character.get(1).getName(),
             character.get(2).getName(),
             character.get(3).getName()
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -149,13 +203,16 @@ public class MainController {
         String conteudo = events.get(0).getTitle();
         boolean conteudoIsImage = false;
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            "" + events.get(0).getStart() + " - " + events.get(0).getEnd(),
             "" + events.get(1).getStart() + " - " + events.get(1).getEnd(),
             "" + events.get(2).getStart() + " - " + events.get(2).getEnd(),
             "" + events.get(3).getStart() + " - " + events.get(3).getEnd()
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -171,13 +228,16 @@ public class MainController {
         String conteudo = "" + events.get(0).getThumbnail().getPath() + "/portrait_incredible." + events.get(0).getThumbnail().getExtension();
         boolean conteudoIsImage = true;
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            "" + events.get(0).getTitle(),
             "" + events.get(1).getTitle(),
             "" + events.get(2).getTitle(),
             "" + events.get(3).getTitle()
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -193,13 +253,16 @@ public class MainController {
         String conteudo = "" + events.get(0).getDescription();
         boolean conteudoIsImage = false;
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            "" + events.get(0).getTitle(),
             "" + events.get(1).getTitle(),
             "" + events.get(2).getTitle(),
             "" + events.get(3).getTitle()
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -215,13 +278,16 @@ public class MainController {
         String conteudo = "" + events.get(0).getThumbnail().getPath() + "/portrait_incredible." + events.get(0).getThumbnail().getExtension();
         boolean conteudoIsImage = true;
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            "" + events.get(0).getStart(),
             "" + events.get(1).getStart(),
             "" + events.get(2).getStart(),
             "" + events.get(3).getStart()
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -237,13 +303,16 @@ public class MainController {
         String conteudo = "" + events.get(0).getDescription();
         boolean conteudoIsImage = false;
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            "" + events.get(0).getEnd(),
             "" + events.get(1).getEnd(),
             "" + events.get(2).getEnd(),
             "" + events.get(3).getEnd()
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -259,13 +328,16 @@ public class MainController {
         String conteudo = "" + comics.get(0).getThumbnail().getPath() + "/portrait_incredible." + comics.get(0).getThumbnail().getExtension();
         boolean conteudoIsImage = true;
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            "" + comics.get(0).getTitle(),
             "" + comics.get(1).getTitle(),
             "" + comics.get(2).getTitle(),
             "" + comics.get(3).getTitle()
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -319,13 +391,16 @@ public class MainController {
             respostaErrada1 = respostaErrada1 + ", " + itemsErrados3.get(i).getName();
         }
 
-        String respostasErradas[] = new String[] {
+        String respostasFixa[] = new String[] {
+            "" + respostaCerta,
             "" + respostaErrada1,
             "" + respostaErrada2,
             "" + respostaErrada3
         };
 
-        Quiz quiz = new Quiz(pergunta, respostaCerta, respostasErradas, conteudo, conteudoIsImage);
+        String[] respostas = randomArray(respostasFixa);
+
+        Quiz quiz = new Quiz(pergunta, respostaCerta, respostas, conteudo, conteudoIsImage);
 
         return quiz;
     }
@@ -412,6 +487,24 @@ public class MainController {
         int intervalo = total / limite;
         Random ran = new Random();
         return ran.nextInt(intervalo);
+    }
+
+    private String[] randomArray (String[] respostas){
+
+        String[] respostasRandom = {"", "", "", ""};
+
+        Random ran = new Random();
+
+        for (int i = 0; i < 4; i++){
+            int index = ran.nextInt(4);
+
+            while(respostasRandom[index] != "") {
+                index = ran.nextInt(4);
+            }
+            respostasRandom[index] = respostas[i];
+        }
+
+        return respostasRandom;
     }
 
 }
