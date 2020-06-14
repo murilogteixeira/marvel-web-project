@@ -1,0 +1,16 @@
+.navbar.red{
+    background-color: red;
+    color: #d60000;
+}
+
+nav .navbar-nav li a{
+    color: white !important;
+}
+
+nav .navbar-header a{
+    color: white !important;
+}
+
+.fontColorNavBar{
+    color: white;
+}

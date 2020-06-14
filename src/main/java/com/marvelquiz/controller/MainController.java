@@ -110,7 +110,7 @@ public class MainController {
     public String quizPresentation(Map<String, Object> model){
         model.put("activeTab", "quiz");
 
-        Quiz quiz = getQuizTitleAutoresComic();
+        Quiz quiz = getQuizTitlePeriodoEvento();
 
         model.put("quiz", quiz);
         return "quiz-game";

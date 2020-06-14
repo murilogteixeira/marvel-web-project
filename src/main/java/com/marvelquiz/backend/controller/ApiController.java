@@ -146,7 +146,7 @@ public class ApiController {
                 for(int i = 0; i < limit.get(); i++) {
                     int index = new Random().nextInt(size);
                     Comic c = entity.getBody().getData().getResults().get(index);
-                    if(comics.contains(c) || c.getCreators().getItems().get(0).getName().contains("") || c.getCreators().getItems().get(0).getName().contains(" ")) {
+                    if(comics.contains(c) || c.getThumbnail().getPath().contains("image_not_available") || c.getThumbnail().getPath().contains("4c002e0305708")) {
                         i--;
                     } else {
                         comics.add(c);
