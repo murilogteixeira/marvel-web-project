@@ -3,21 +3,23 @@
 
 <body>
   <div class="container">
-    <h1>Quiz</h1>
+    <h1 style="color: white;">Quiz</h1>
     </br>
     
     <div class="container"> 
-        <h3>
+        <h3 style="color: #E6E6E6;">
             <span th:text="${quiz.pergunta}"/>
         </h3>
 
         <br>
 
         <div th:if="${quiz.conteudoIsImage} == true">
-            <img th:src="${quiz.conteudo}"/>
+            <div class="cardHomeBottom">
+                <img th:src="${quiz.conteudo}"/>
+            </div>
         </div>
         <div th:if="${quiz.conteudoIsImage} == false">
-            <h4>
+            <h3 style="color: #f2ea46;">
                 <span th:text="${quiz.conteudo}"/>
             </h4>
         </div>
@@ -27,12 +29,12 @@
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostaCerta}"/>
+                <h4 style="text-align: center;" th:text="${quiz.respostas[0]}"/>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostasErradas[0]}"/>
+                <h4 style="text-align: center;" th:text="${quiz.respostas[1]}"/>
             </div>
         </div>
       </div>
@@ -40,30 +42,36 @@
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostasErradas[1]}"/>
+                <h4 style="text-align: center;" th:text="${quiz.respostas[2]}"/>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostasErradas[2]}"/>
+                <h4 style="text-align: center;" th:text="${quiz.respostas[3]}"/>
             </div>
         </div>
       </div>
     </div>
+    <br><br><br>
+  <div class="container">
+    <a href="">
+      <h3 style="color: #f2ea46; text-align: right;">Next <span class="glyphicon glyphicon-menu-right"></span></h3>
+    </a>
+  </div>
     
     <div class="cardHomeBottom">
       <div class="row">
         <div class="col-sm-4">
-          <h2>Heroes</h2>
-          <p>Get to know marvel heroes better.</p>
+          <h2 style="color: white;">Heroes</h2>
+          <p style="color: white;">Get to know marvel heroes better.</p>
         </div>
         <div class="col-sm-4">
-          <h2>History</h2>
-          <p>Learn a little more about the story of Marvel's most acclaimed heroes.</p>
+          <h2 style="color: white;" >History</h2>
+          <p style="color: white;">Learn a little more about the story of Marvel's most acclaimed heroes.</p>
        </div>
         <div class="col-sm-4">
-          <h2>Comics</h2>
-          <p>Discover new things about this great universe.</p>
+          <h2 style="color: white;">Comics</h2>
+          <p style="color: white;">Discover new things about this great universe.</p>
         </div>
       </div>
    </div>
@@ -71,7 +79,9 @@
   <hr>
 
   <footer>
-    <p>© Grupo Pagumu</p>
+    <br>
+    <p style="color: white; text-align: center;">© Grupo Pagumu</p>
+    <br>
   </footer>
 
   </div>

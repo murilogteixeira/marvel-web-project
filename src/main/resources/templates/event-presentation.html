@@ -6,8 +6,8 @@
     <div class="container">
         <div class="card">
           <div class="card-body">
-            <h1>Historical Events Presentation</h1>
-            <p>The best historical events from Marvel Universe.</p>
+            <h1 style="color: white;">Historical Events Presentation</h1>
+            <h4 style="color: #E6E6E6; text-align: center;">The best historical events from Marvel Universe.</h4>
             <br>
             <ul th:each="record : ${records}">
               <div class="card">
@@ -18,23 +18,19 @@
                       <img th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}"/>
                     </div>
                     <div class="col-sm-8">
-                      <h4> Title: </h4>
-                      <li th:text="${record.title}"/>
+                      <h4 style="color: #E6E6E6;"> Title: </h4>
+                      <p style="color: #E6E6E6; text-align: center;" th:text="${record.title}"/>
                       <br>
-                      <h4> Start date: </h4>
-                      <li th:text="${record.start}"/>
+                      <h4 style="color: #E6E6E6;"> Start date: </h4>
+                      <p style="color: #E6E6E6; text-align: center;" th:text="${record.start}"/>
                       <br>
-                      <h4> End date: </h4>
-                      <li th:text="${record.end}"/>
+                      <h4 style="color: #E6E6E6;"> End date: </h4>
+                      <p style="color: #E6E6E6; text-align: center;" th:text="${record.end}"/>
                       <br>
+                      <h4 style="color: #E6E6E6;"> Description: </h4>
+                      <p style="color: #E6E6E6; text-align: center;" th:text="${record.description}"/>
                     </div>
                     <br>
-                    <div class="col-sm-2">
-                      <h4> Description: </h4>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                      <li th:text="${record.description}"/>
-                    </div>
                   </div>
                   <br>
                 </div>
@@ -45,27 +41,29 @@
         </div>
   
         <div class="cardHomeBottom">
-            <div class="row">
-              <div class="col-sm-4">
-                <h2>Heroes</h2>
-                <p>Get to know marvel heroes better.</p>
-              </div>
-              <div class="col-sm-4">
-                <h2>Events</h2>
-                <p>Learn a little more about the story of Marvel's most acclaimed heroes.</p>
-             </div>
-              <div class="col-sm-4">
-                <h2>Curiosities</h2>
-                <p>Discover new things about this great universe.</p>
-              </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <h2 style="color: white;">Heroes</h2>
+              <p style="color: white;">Get to know marvel heroes better.</p>
             </div>
-         </div>
-  
-        <hr>
-  
-        <footer>
-          <p>© Grupo Pagumu</p>
-        </footer>
+            <div class="col-sm-4">
+              <h2 style="color: white;" >History</h2>
+              <p style="color: white;">Learn a little more about the story of Marvel's most acclaimed heroes.</p>
+           </div>
+            <div class="col-sm-4">
+              <h2 style="color: white;">Comics</h2>
+              <p style="color: white;">Discover new things about this great universe.</p>
+            </div>
+          </div>
+       </div>
+    
+      <hr>
+    
+      <footer>
+        <br>
+        <p style="color: white; text-align: center;">© Grupo Pagumu</p>
+        <br>
+      </footer>
   
       </div>
   </body>

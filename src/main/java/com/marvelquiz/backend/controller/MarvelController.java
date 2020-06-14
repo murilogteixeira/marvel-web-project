@@ -75,8 +75,8 @@ public class MarvelController {
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
-        .queryParam("limit", 50)
-        .queryParam("offset", randomInt(50, 1493));
+        .queryParam("limit", 5)
+        .queryParam("offset", 200);
 
         UriComponents uri = uriBuilder.build();
 
@@ -139,7 +139,7 @@ public class MarvelController {
                 for(int i = 0; i < limit.get(); i++) {
                     int index = new Random().nextInt(size);
                     Comic c = entity.getBody().getData().getResults().get(index);
-                    if(comics.contains(c)) {
+                    if(comics.contains(c) || c.getThumbnail().getPath().contains("image_not_available") || c.getThumbnail().getPath().contains("4c002e0305708")) {
                         i--;
                     } else {
                         comics.add(c);
@@ -184,7 +184,7 @@ public class MarvelController {
                 for(int i = 0; i < limit.get(); i++) {
                     int index = new Random().nextInt(size);
                     Event e = entity.getBody().getData().getResults().get(index);
-                    if(events.contains(e)) {
+                    if(events.contains(e) || e.getStart() == null || e.getStart().contains("null")) {
                         i--;
                     } else {
                         events.add(e);
