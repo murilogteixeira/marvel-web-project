@@ -29,7 +29,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-public class ApiController {
+public class MarvelController {
 
     Credenciais c = new Credenciais();
 
