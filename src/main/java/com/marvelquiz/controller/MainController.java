@@ -15,6 +15,7 @@ import com.marvelquiz.bean.events2.Event;
 
 import com.marvelquiz.bean.quiz.PerguntasQuiz;
 import com.marvelquiz.bean.quiz.Quiz;
+import com.marvelquiz.bean.quiz.QuizResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -109,6 +110,14 @@ public class MainController {
 
     @RequestMapping("/quiz")
     public String quizPresentation(Map<String, Object> model){
+        
+        if (quizCount == 8) {
+            quizCount = 0;
+            model.put("activeTab", "quiz");
+
+            return "redirect:/result";
+        }
+        
         model.put("activeTab", "quiz");
         
         Quiz quiz = null;
@@ -137,7 +146,6 @@ public class MainController {
             break;
             case 7:
                 quiz = getQuizTitleAutoresComic();
-                quizCount = -1;
             break;
         }
 
@@ -145,6 +153,18 @@ public class MainController {
         quizCount++;
         
         return "quiz-game";
+    }
+
+    @RequestMapping("/result")
+    public String resultPresentation(Map<String, Object> model) {
+        model.put("activeTab", "result");
+
+        QuizResult result = new QuizResult();
+
+        // Retrieve do banco
+
+        model.put("records", result);
+        return "quiz-result";
     }
 
     private Quiz getQuizImagemNomePersonagem(){
