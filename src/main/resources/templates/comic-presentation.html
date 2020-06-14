@@ -16,7 +16,7 @@
                   <div class="row">
                     <div class="divCenter">
                       <h4 style="color: #E6E6E6;"> Title: </h4>
-                      <li th:text="${record.title}"/>
+                      <li style="color: #E6E6E6;" th:text="${record.title}"/>
                       <br>
                       <h4 style="color: #E6E6E6;"> Author(s): </h4>
                       <div th:if="${record.creators.items} != null and ${record.creators.items.isEmpty()} == false">
