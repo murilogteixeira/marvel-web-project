@@ -1,4 +1,4 @@
-package com.marvelquiz.bean.comics2;
+package com.marvelquiz.bean.comics;
 
 public class ComicDate {
     private String type;

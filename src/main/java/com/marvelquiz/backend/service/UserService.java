@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import com.marvelquiz.backend.repository.UserRepository;
-import com.marvelquiz.backend.service.interfaces.UserServiceInterface;
+import com.marvelquiz.backend.service.interfaces.ServiceInterface;
 import com.marvelquiz.bean.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserServiceInterface {
+public class UserService implements ServiceInterface<User> {
 	@Autowired
 	private UserRepository repository;
 
@@ -23,6 +23,10 @@ public class UserService implements UserServiceInterface {
 	@Override
 	public Optional<User> findById(Long id) {
 		return repository.findById(id);
+	}
+
+	public Optional<User> findByUsername(String username) {
+		return repository.findByUsername(username);
 	}
 
 	@Override

@@ -48,6 +48,7 @@ public class UserController {
         if (oldUser.isPresent()) {
             User user = oldUser.get();
             user.setUsername(newPessoa.getUsername());
+            user.setPassword(newPessoa.getPassword());
             service.save(user);
             return new ResponseEntity<User>(user, HttpStatus.OK);
         } else
