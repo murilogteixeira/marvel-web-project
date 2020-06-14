@@ -1,0 +1,16 @@
+.navbar.red{
+    background-color: red;
+    color: red;
+}
+
+nav .navbar-nav li a{
+    color: white !important;
+}
+
+.navbar.navbar-default.navbar-static-top.navbar-inverser.navbar-header a{
+    color: white !important;
+}
+
+.fontColorNavBar{
+    color: white;
+}
