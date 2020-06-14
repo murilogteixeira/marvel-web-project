@@ -11,10 +11,10 @@ import com.marvelquiz.backend.model.DataReturn;
 import com.marvelquiz.backend.model.character.MarvelReturnWithCharacter;
 import com.marvelquiz.backend.model.comics.MarvelReturnWithComic;
 import com.marvelquiz.backend.model.events.MarvelReturnWithEvent;
-import com.marvelquiz.bean.character2.Character;
-import com.marvelquiz.bean.comics2.Comic;
+import com.marvelquiz.bean.character.Character;
+import com.marvelquiz.bean.comics.Comic;
 import com.marvelquiz.bean.errors.RestClientError;
-import com.marvelquiz.bean.events2.Event;
+import com.marvelquiz.bean.events.Event;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,46 +29,40 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-public class ApiController {
+public class MarvelController {
 
-    Credenciais c = new Credenciais();
+    private Credenciais c = new Credenciais();
 
-    // ApiReturn<Character> charactersReturn = new ApiReturn<>();
-    // ApiReturn<Comic> comicsReturn = new ApiReturn<>();
-    // ApiReturn<Event> eventsReturn = new ApiReturn<>();
+    private String scheme = "https";
+    private String host = "gateway.marvel.com";
+    private int port = 443;
+    private String path = "v1/public/";
 
     final String characterRequestMapping = "/api/characters";
     @RequestMapping(value = characterRequestMapping, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> characters(@RequestParam Optional<Integer> limit) {
-
+    ResponseEntity<DataReturn<Character>> characters(@RequestParam Optional<Integer> limit) {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         System.out.println(ts + " Request : " + characterRequestMapping);
 
-        String json = new Gson().toJson(getCharacters(limit));
-
-        return new ResponseEntity<String>(json, HttpStatus.OK);
+        return new ResponseEntity<DataReturn<Character>>(getCharacters(limit), HttpStatus.OK);
     }
 
     final String comicsRequestMapping = "/api/comics";
     @RequestMapping(value = comicsRequestMapping, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> comics(Optional<Integer> limit) {
+    public ResponseEntity<DataReturn<Comic>> comics(Optional<Integer> limit) {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         System.out.println(ts + " Request : " + comicsRequestMapping);
         
-        String json = new Gson().toJson(getComics(limit));
-
-        return new ResponseEntity<String>(json, HttpStatus.OK);
+        return new ResponseEntity<DataReturn<Comic>>(getComics(limit), HttpStatus.OK);
     }
 
     final String eventsRequestMapping = "/api/events";
     @RequestMapping(value = eventsRequestMapping, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> events(Optional<Integer> limit) {
+    public ResponseEntity<DataReturn<Event>> events(Optional<Integer> limit) {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         System.out.println(ts + " Request : " + eventsRequestMapping);
         
-        String json = new Gson().toJson(getEvents(limit));
-
-        return new ResponseEntity<String>(json, HttpStatus.OK);
+        return new ResponseEntity<DataReturn<Event>>(getEvents(limit), HttpStatus.OK);
     }
 
     private DataReturn<Character> getCharacters(Optional<Integer> limit) {
@@ -76,8 +70,8 @@ public class ApiController {
         c.setTs(ts);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance()
-        .scheme("https").host("gateway.marvel.com").port(443)
-        .path("v1/public/characters")
+        .scheme(scheme).host(host).port(port)
+        .path(path + "characters")
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
@@ -106,7 +100,6 @@ public class ApiController {
                 entity.getBody().getData().setResults(characters);
             }
 
-
             HttpStatus status = entity.getStatusCode();
             System.out.println(ts + " " + status);
             return entity.getBody().getData();
@@ -123,8 +116,8 @@ public class ApiController {
         c.setTs(ts);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance()
-        .scheme("https").host("gateway.marvel.com").port(443)
-        .path("v1/public/comics")
+        .scheme(scheme).host(host).port(port)
+        .path(path + "comics")
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
@@ -171,8 +164,8 @@ public class ApiController {
         c.setTs(ts);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance()
-        .scheme("https").host("gateway.marvel.com").port(443)        
-        .path("v1/public/events")
+        .scheme(scheme).host(host).port(port)
+        .path(path + "events")
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())

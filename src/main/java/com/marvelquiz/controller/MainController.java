@@ -8,16 +8,14 @@ import java.util.Random;
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
 import com.marvelquiz.backend.model.comics.DataReturnWithComic;
 import com.marvelquiz.backend.model.events.DataReturnWithEvent;
-import com.marvelquiz.bean.character2.Character;
-import com.marvelquiz.bean.comics2.Items;
-import com.marvelquiz.bean.comics2.Comic;
-import com.marvelquiz.bean.events2.Event;
-
+import com.marvelquiz.bean.character.Character;
+import com.marvelquiz.bean.comics.Comic;
+import com.marvelquiz.bean.comics.Items;
+import com.marvelquiz.bean.events.Event;
 import com.marvelquiz.bean.quiz.PerguntasQuiz;
 import com.marvelquiz.bean.quiz.Quiz;
 import com.marvelquiz.bean.quiz.QuizResult;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

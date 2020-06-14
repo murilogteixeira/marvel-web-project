@@ -1,4 +1,4 @@
-package com.marvelquiz.bean.character2;
+package com.marvelquiz.bean.character;
 
 import com.marvelquiz.bean.Thumbnail;
 

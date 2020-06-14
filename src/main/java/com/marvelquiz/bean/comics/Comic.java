@@ -1,33 +1,34 @@
-package com.marvelquiz.bean.events2;
+package com.marvelquiz.bean.comics;
+
+import java.util.ArrayList;
 
 import com.marvelquiz.bean.Thumbnail;
 
-public class Event {
+public class Comic {
     private int id;
     private String title;
-    private String description;
-    private String start;
-    private String end;
+    private ArrayList<ComicDate> date;
     private Thumbnail thumbnail;
+    private Creators creators;
 
     public int getId() {
         return id;
     }
 
-    public String getEnd() {
-        return end;
+    public Creators getCreators() {
+        return creators;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setCreators(Creators creators) {
+        this.creators = creators;
     }
 
-    public String getStart() {
-        return start;
+    public ArrayList<ComicDate> getDate() {
+        return date;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setDate(ArrayList<ComicDate> date) {
+        this.date = date;
     }
 
     public String getTitle() {
@@ -44,14 +45,6 @@ public class Event {
 
     public void setThumbnail(Thumbnail thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setId(int id) {
