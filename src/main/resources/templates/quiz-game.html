@@ -3,11 +3,11 @@
 
 <body>
   <div class="container">
-    <h1>Quiz</h1>
+    <h1 style="color: white;">Quiz</h1>
     </br>
     
     <div class="container"> 
-        <h3>
+        <h3 style="color: #E6E6E6;">
             <span th:text="${quiz.pergunta}"/>
         </h3>
 
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div th:if="${quiz.conteudoIsImage} == false">
-            <h4>
+            <h4 style="color: #E6E6E6;">
                 <span th:text="${quiz.conteudo}"/>
             </h4>
         </div>
@@ -29,12 +29,12 @@
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostaCerta}"/>
+                <li style="color: #E6E6E6; text-align: center;" th:text="${quiz.respostaCerta}"/>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostasErradas[0]}"/>
+                <li style="color: #E6E6E6; text-align: center;" th:text="${quiz.respostasErradas[0]}"/>
             </div>
         </div>
       </div>
@@ -42,12 +42,12 @@
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostasErradas[1]}"/>
+                <li style="color: #E6E6E6; text-align: center;" th:text="${quiz.respostasErradas[1]}"/>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <li th:text="${quiz.respostasErradas[2]}"/>
+                <li style="color: #E6E6E6; text-align: center;" th:text="${quiz.respostasErradas[2]}"/>
             </div>
         </div>
       </div>
@@ -56,16 +56,16 @@
     <div class="cardHomeBottom">
       <div class="row">
         <div class="col-sm-4">
-          <h2>Heroes</h2>
-          <p>Get to know marvel heroes better.</p>
+          <h2 style="color: white;">Heroes</h2>
+          <p style="color: white;">Get to know marvel heroes better.</p>
         </div>
         <div class="col-sm-4">
-          <h2>History</h2>
-          <p>Learn a little more about the story of Marvel's most acclaimed heroes.</p>
+          <h2 style="color: white;" >History</h2>
+          <p style="color: white;">Learn a little more about the story of Marvel's most acclaimed heroes.</p>
        </div>
         <div class="col-sm-4">
-          <h2>Comics</h2>
-          <p>Discover new things about this great universe.</p>
+          <h2 style="color: white;">Comics</h2>
+          <p style="color: white;">Discover new things about this great universe.</p>
         </div>
       </div>
    </div>
@@ -73,7 +73,9 @@
   <hr>
 
   <footer>
-    <p>© Grupo Pagumu</p>
+    <br>
+    <p style="color: white; text-align: center;">© Grupo Pagumu</p>
+    <br>
   </footer>
 
   </div>

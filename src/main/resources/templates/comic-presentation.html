@@ -6,8 +6,8 @@
     <div class="container">
         <div class="card">
           <div class="card-body">
-            <h1 class="divCenter">Comic Presentation</h1>
-            <p>The best comics from Marvel Universe.</p>
+            <h1 style="color: white;">Comic Presentation</h1>
+            <h4 style="color: #E6E6E6; text-align: center;">The best comics from Marvel Universe.</h4>
             <br>
             <ul th:each="record : ${records}">
               <div class="card">
@@ -15,17 +15,17 @@
                   <br>
                   <div class="row">
                     <div class="divCenter">
-                      <h4> Title: </h4>
+                      <h4 style="color: #E6E6E6;"> Title: </h4>
                       <li th:text="${record.title}"/>
                       <br>
-                      <h4> Author(s): </h4>
+                      <h4 style="color: #E6E6E6;"> Author(s): </h4>
                       <div th:if="${record.creators.items} != null and ${record.creators.items.isEmpty()} == false">
                         <ul th:each="item : ${record.creators.items}">
-                          <li th:text="${item.name}"/>
+                          <li style="color: #E6E6E6;" th:text="${item.name}"/>
                         </ul>
                       </div>
                       <div th:if="${record.creators.items} == null or ${record.creators.items.isEmpty()} == true">
-                        <li th:text="UNKNOWN"/>
+                        <li style="color: #E6E6E6;" th:text="UNKNOWN"/>
                       </div>
                       <br>
                     </div>
@@ -43,27 +43,29 @@
         </div>
   
         <div class="cardHomeBottom">
-            <div class="row">
-              <div class="col-sm-4">
-                <h2>Heroes</h2>
-                <p>Get to know marvel heroes better.</p>
-              </div>
-              <div class="col-sm-4">
-                <h2>History</h2>
-                <p>Learn a little more about the story of Marvel's most acclaimed heroes.</p>
-             </div>
-              <div class="col-sm-4">
-                <h2>Comics</h2>
-                <p>Discover new things about this great universe.</p>
-              </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <h2 style="color: white;">Heroes</h2>
+              <p style="color: white;">Get to know marvel heroes better.</p>
             </div>
-         </div>
-  
-        <hr>
-  
-        <footer>
-          <p>© Grupo Pagumu</p>
-        </footer>
+            <div class="col-sm-4">
+              <h2 style="color: white;" >History</h2>
+              <p style="color: white;">Learn a little more about the story of Marvel's most acclaimed heroes.</p>
+           </div>
+            <div class="col-sm-4">
+              <h2 style="color: white;">Comics</h2>
+              <p style="color: white;">Discover new things about this great universe.</p>
+            </div>
+          </div>
+       </div>
+    
+      <hr>
+    
+      <footer>
+        <br>
+        <p style="color: white; text-align: center;">© Grupo Pagumu</p>
+        <br>
+      </footer>
   
       </div>
   </body>
