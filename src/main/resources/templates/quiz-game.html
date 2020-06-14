@@ -29,12 +29,12 @@
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <p style="text-align: center;" th:text="${quiz.respostaCerta}"/>
+                <h4 style="text-align: center;" th:text="${quiz.respostas[0]}"/>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <p style="text-align: center;" th:text="${quiz.respostasErradas[0]}"/>
+                <h4 style="text-align: center;" th:text="${quiz.respostas[1]}"/>
             </div>
         </div>
       </div>
@@ -42,12 +42,14 @@
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <p style="text-align: center;" th:text="${quiz.respostasErradas[1]}"/>
+                <h4 style="text-align: center;" th:text="${quiz.respostas[2]}"/>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <p style="text-align: center;" th:text="${quiz.respostasErradas[2]}"/>
+                <a href="" onclick="">
+                  <h4 style="text-align: center;" th:text="${quiz.respostas[3]}"/>
+                </a>
             </div>
         </div>
       </div>

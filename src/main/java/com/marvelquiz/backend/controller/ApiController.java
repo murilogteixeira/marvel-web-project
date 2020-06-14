@@ -81,8 +81,8 @@ public class ApiController {
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
-        .queryParam("limit", 50)
-        .queryParam("offset", randomInt(50, 1493));
+        .queryParam("limit", 5)
+        .queryParam("offset", 200);
 
         UriComponents uri = uriBuilder.build();
 
@@ -191,7 +191,7 @@ public class ApiController {
                 for(int i = 0; i < limit.get(); i++) {
                     int index = new Random().nextInt(size);
                     Event e = entity.getBody().getData().getResults().get(index);
-                    if(events.contains(e) || e.getDescription().contains("")) {
+                    if(events.contains(e) || e.getStart().contains(null) || e.getStart().contains("null")) {
                         i--;
                     } else {
                         events.add(e);
