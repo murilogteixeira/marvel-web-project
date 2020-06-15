@@ -19,6 +19,14 @@ h4 {
   margin-top: 75px;
 }
 
+.cardHome{
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color:#151515;
+  border-radius: 10px;
+}
+
 .cardResposta{
   text-align: center;
   padding-top: 50px;
