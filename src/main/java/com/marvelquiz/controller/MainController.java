@@ -420,8 +420,8 @@ public class MainController {
         // int total = 1493;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme(scheme).host(host)
-        // .scheme("http").host("localhost").port(5000)
+        // .scheme(scheme).host(host)
+        .scheme("http").host("localhost").port(5000)
         .path("/api/characters")
         .queryParam("limit", limite)
         .queryParam("offset", randomInt(limite, total))
@@ -473,8 +473,8 @@ public class MainController {
         // int total = 75;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme(scheme).host(host)
-        // .scheme("http").host("localhost").port(5000)     
+        // .scheme(scheme).host(host)
+        .scheme("http").host("localhost").port(5000)     
         .path("/api/events")
         .queryParam("limit", limite)
         .queryParam("offset", randomInt(limite, total))
