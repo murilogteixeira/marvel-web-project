@@ -48,8 +48,8 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-right">
-                    <a class="nav-link" href="https://canaltech.com.br/redes-sociais/o-que-e-login/">
+                <li class="navbar-right" th:class="${activeTab == 'login'} ? active : null">
+                    <a class="nav-link" href="/login">
                         <span class="glyphicon glyphicon-book"></span> 
                         Login
                     </a>

@@ -42,6 +42,18 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/login")
+    public String login(Map<String, Object> model) {
+        model.put("activeTab", "login");
+        return "login-presentation";
+    }
+
+    @RequestMapping("/register")
+    public String register(Map<String, Object> model) {
+        model.put("activeTab", "register");
+        return "register-presentation";
+    }
+
     // @RequestMapping("/db")
     // public String getDB(Map<String, Object> model) {
 
