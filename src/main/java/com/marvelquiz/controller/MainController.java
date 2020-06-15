@@ -155,7 +155,7 @@ public class MainController {
                 quiz = getQuizImageTitleComic();
             break;
             case 7:
-                quiz = getQuizTitleAutoresComic();
+                quiz = getQuizImagemNomePersonagem();
             break;
         }
 

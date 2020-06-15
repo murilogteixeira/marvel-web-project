@@ -75,8 +75,8 @@ public class MarvelController {
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
-        .queryParam("limit", 5)
-        .queryParam("offset", 200);
+        .queryParam("limit", 20)
+        .queryParam("offset", 50);
 
         UriComponents uri = uriBuilder.build();
 
@@ -123,7 +123,7 @@ public class MarvelController {
         .queryParam("hash", c.getHash())
         .queryParam("format", "comic")
         .queryParam("noVariants", "true")
-        .queryParam("limit", 50)
+        .queryParam("limit", 30)
         .queryParam("offset", randomInt(50, 32589));
 
         UriComponents uri = uriBuilder.build();
@@ -169,7 +169,7 @@ public class MarvelController {
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
-        .queryParam("limit", 75);
+        .queryParam("limit", 10);
 
         UriComponents uri = uriBuilder.build();
 

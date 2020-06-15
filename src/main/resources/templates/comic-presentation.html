@@ -10,27 +10,31 @@
         <h4 style="color: #E6E6E6; text-align: center;">The best comics from Marvel Universe.</h4>
         <br>
         <div class="row">
-          <div th:each="record : ${records}">
-            <br>
-
-            <h4 style="color: #E6E6E6;"> Title: </h4>
-            <p style="color: #E6E6E6; text-align: center;" th:text="${record.title}" />
-            <br>
-            <h4 style="color: #E6E6E6;"> Author(s): </h4>
-            <div th:if="${record.creators.items} != null and ${record.creators.items.isEmpty()} == false">
-              <div th:each="item : ${record.creators.items}">
-                <p style="color: #E6E6E6; text-align: center;" th:text="${item.name}" />
+          <div class="cardHome">
+            <div th:each="record : ${records}">
+              <br>
+              <h4 style="color: #E6E6E6;"> Title: </h4>
+              <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.title}" />
+              <br>
+              <h4 style="color: #E6E6E6;"> Author(s): </h4>
+              <div th:if="${record.creators.items} != null and ${record.creators.items.isEmpty()} == false">
+                <div th:each="item : ${record.creators.items}">
+                  <h5 style="color: #E6E6E6; text-align: center;" th:text="${item.name}" />
+                </div>
               </div>
+              <div th:if="${record.creators.items} == null or ${record.creators.items.isEmpty()} == true">
+                <h5 style="color: #E6E6E6; text-align: center;" th:text="UNKNOWN" />
+              </div>
+              <div class="divCenter">
+                <img style="text-align: center;"
+                  th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}" />
+              </div>
+              <br>
             </div>
-            <div th:if="${record.creators.items} == null or ${record.creators.items.isEmpty()} == true">
-              <p style="color: #E6E6E6; text-align: center;" th:text="UNKNOWN" />
-            </div>
-            <div class="divCenter">
-              <img style="text-align: center;" th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}" />
-          </div>
-            <br>
           </div>
         </div>
+        <br>
+        <br>
         <br>
       </div>
       <br>

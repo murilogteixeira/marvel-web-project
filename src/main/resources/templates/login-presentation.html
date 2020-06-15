@@ -5,26 +5,28 @@
 <body>
   <br><br><br>
   <div class="container" style="align-items: center; background-color: brown; width: 50%;">
-    <div class="divCenter">
-      <h3 style="color: white;">Login</h1></h3></br>
-      <input type="text" name="txtLogin">
-    </div></br>
-    <div class="divCenter">
-      <h3 style="color: white;">Senha</h1></h3></br>
-      <input type="password" name="txtSenha">
-    </div><br><br>
-    <!-- <div class="centerButtons"> -->
-      <button type="button" style="text-align: center;" class="btn btn-warning btnLoginCadastrar">
-        Logar
-      </button></br></br>
+    <form action="/api/login" method="POST">
+      <div class="divCenter">
+        <h3 style="color: white;">Login</h1></h3></br>
+        <input type="text" name="txtLogin">
+      </div></br>
+      <div class="divCenter">
+        <h3 style="color: white;">Senha</h1></h3></br>
+        <input type="password" name="txtSenha">
+      </div><br><br>
+      <!-- <div class="centerButtons"> -->
+        <button type="submit" style="text-align: center;" class="btn btn-warning btnLoginCadastrar">
+          Logar
+        </button></br></br>
 
-      <a href="/register">
-        <button type="button" style="text-align: center; color: white;" class="btn btn-link btnLoginCadastrar">
-          
-          Register
-        </button>
-      </a>
-    <!-- </div> -->
-    <br><br>
+        <a href="/register">
+          <button type="button" style="text-align: center; color: white;" class="btn btn-link btnLoginCadastrar">
+            
+            Register
+          </button>
+        </a>
+      <!-- </div> -->
+      <br><br>
+    </form>
   </div>  
 </body>
