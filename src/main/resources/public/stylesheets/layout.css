@@ -47,3 +47,19 @@ footer{
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+.btn-dark{
+    background-color: #343a40; 
+    color: white;
+    border-color: #343a40;
+}
+
+.roundedCorners{
+    border-radius: 10px;
+}
+
+.roundedCornersText{
+    border-radius: 5px;
+}
+
+
