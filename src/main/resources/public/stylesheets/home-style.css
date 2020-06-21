@@ -24,3 +24,12 @@
 button{
   position: absolute;
 }
+
+.divDescription{
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  word-wrap: break-word;
+  width: 250px;
+  text-align: center;
+}
