@@ -1,13 +1,25 @@
 package com.marvelquiz.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.marvelquiz.backend.model.ApiResponse;
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
 import com.marvelquiz.backend.model.comics.DataReturnWithComic;
 import com.marvelquiz.backend.model.events.DataReturnWithEvent;
+import com.marvelquiz.bean.User;
 import com.marvelquiz.bean.character.Character;
 import com.marvelquiz.bean.comics.Comic;
 import com.marvelquiz.bean.comics.Items;
@@ -16,6 +28,10 @@ import com.marvelquiz.bean.quiz.PerguntasQuiz;
 import com.marvelquiz.bean.quiz.Quiz;
 import com.marvelquiz.bean.quiz.QuizResult;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +62,44 @@ public class MainController {
     public String login(Map<String, Object> model) {
         model.put("activeTab", "login");
         return "login-presentation";
+    }
+
+    @RequestMapping(value = {"/home"}, method = RequestMethod.POST)
+    public String loginError(@RequestParam("username") String username, @RequestParam("password") String password) {
+        User user = new User();
+        user.setPassword(password);
+        user.setUsername(username);
+
+        UriComponents uri = UriComponentsBuilder.newInstance()
+        .scheme("http").host("localhost").port(5000)     
+        .path("/api/login")
+        .build();
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+            map.add("username", user.getUsername());
+            map.add("password", user.getPassword());
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+
+            System.out.println("User: " + user.getUsername() + "Password: " + user.getPassword());
+
+            ResponseEntity<ApiResponse> responseEntity = restTemplate.postForEntity(uri.toString(), request, ApiResponse.class);
+
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                return "index";
+            } else {
+                return "login-validation";
+            }
+        } catch (RestClientException e) {
+            System.out.println(e.getLocalizedMessage());
+            return "login-validation";
+        }
     }
 
     @RequestMapping("/register")
