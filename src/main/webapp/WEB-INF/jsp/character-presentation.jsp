@@ -1,12 +1,13 @@
 
-<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- <html xmlns:th="http://www.thymeleaf.org"
-th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}"> -->
+<!DOCTYPE html>
+<html>
 
 <body>
+  <c:import url="navbar.jsp" />
+
   <div class="container">
     <div class="card">
       <div class="card-body" style="color: #E6E6E6;">
@@ -14,32 +15,34 @@ th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}">
         <h4 style="color: #E6E6E6;">The best heroes from Marvel Universe.</h4>
         <br>
         <div class="cardHome">
-          <ul th:each="record : ${records}">
-            <br>
+          <c:forEach items = "${records}" var="record">
             <div class="row">
+              <br>
               <h4 style="color: #E6E6E6; text-align: center;"> Nome: </h4>
-              <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.name}" />
+              <h5 style="color: #E6E6E6; text-align: center;">${record.name}</h5>
+              <c:choose> 
+                <c:when test="${record.name == null} || ${record.name == ''} || ${record.name.isEmpty() == true}">
+                  <h5 style="color: #E6E6E6; text-align: center;">UNKNOWN</h5>
+                </c:when>
+              </c:choose> 
 
-              <h4 id="description" style="color: #E6E6E6; text-align: center;"></h4> 
-
-              <script>
-                var description;
-                description =  "Description:";
-                document.getElementById("description").innerHTML = record.description;
-              </script>
-
-              <div th:if="${record.name} == null or ${record.name} == '' or ${record.name.isEmpty()} == true">
-                <h5 style="color: #E6E6E6; text-align: center;" th:text="UNKNOWN" />
+              <c:choose> 
+                <c:when test="${record.name != null} || ${record.name != ''} || ${record.name.isEmpty() == false}">
+                  <h4 id="description" style="color: #E6E6E6; text-align: center;">Description: </h4>
+                
+                  <div class="divDescription">
+                    <h5 style="color: #E6E6E6; text-align: center;">${record.description}</h5>
+                  </div>
+                </c:when>
+              </c:choose> 
+              
+              <div class="divCenter">
+                <img style="text-align: center;" src="${record.thumbnail.path}/portrait_incredible.${record.thumbnail.extension}"/>
               </div>
-              <div class="divDescription">
-                <div th:if="${record.name} != null or ${record.name} != '' or ${record.name.isEmpty()} == false">
-                  <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.description}" />
-                </div>
-              </div>
-              <img th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}" />
+              <br>
             </div>
             <br>
-          </ul>
+          </c:forEach>
         </div>
       </div>
     </div>
@@ -60,14 +63,13 @@ th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}">
         </div>
       </div>
     </div>
-
     <hr>
 
     <footer>
-      <br>
-      <p style="color: white; text-align: center;">© Grupo Pagumu</p>
-      <br>
+      <p style="color: white;">© Grupo Pagumu</p>
     </footer>
 
   </div>
 </body>
+
+</html>
