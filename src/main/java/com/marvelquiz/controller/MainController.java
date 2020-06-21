@@ -39,8 +39,13 @@ public class MainController {
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
         model.put("activeTab", "home");
-        return "index";
+        return "teste";
     }
+    // @RequestMapping("/error")
+    // public String error(Map<String, Object> model) {
+    //     model.put("activeTab", "home");
+    //     return "teste";
+    // }
 
     @RequestMapping("/login")
     public String login(Map<String, Object> model) {
@@ -418,10 +423,11 @@ public class MainController {
     private ArrayList<Character> getCharacters(int limite, int total) {
         // int limite = 10;
         // int total = 1493;
+        System.out.println("Request: /characters");
 
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme(scheme).host(host)
-        // .scheme("http").host("localhost").port(5000)
+        // .scheme(scheme).host(host)
+        .scheme("http").host("localhost").port(5000)
         .path("/api/characters")
         .queryParam("limit", limite)
         .queryParam("offset", randomInt(limite, total))
@@ -432,7 +438,7 @@ public class MainController {
             ResponseEntity<DataReturnWithCharacter> entity;
             entity = template.getForEntity(uri.toUriString(), DataReturnWithCharacter.class);
             Timestamp ts = new Timestamp(System.currentTimeMillis());
-            System.out.println(ts + " " + entity.getStatusCode());
+            System.out.println(ts + " characters: " + entity.getStatusCode());
             return entity.getBody().getResults();
         } catch (RestClientException e) {
             System.out.println(e);

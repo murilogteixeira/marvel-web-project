@@ -10,3 +10,7 @@ function verficarResposta(resposta, respostaCerta, idFundo){
         return false;
     }
 }
+
+function showAlert(nome) {
+    alert(nome);
+}

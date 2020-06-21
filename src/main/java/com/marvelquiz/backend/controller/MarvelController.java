@@ -75,8 +75,8 @@ public class MarvelController {
         .queryParam("ts", c.getTs())
         .queryParam("apikey", c.getPublicKey())
         .queryParam("hash", c.getHash())
-        .queryParam("limit", 20)
-        .queryParam("offset", 50);
+        .queryParam("limit", 50)
+        .queryParam("offset", randomInt(50, 1493));
 
         UriComponents uri = uriBuilder.build();
 
