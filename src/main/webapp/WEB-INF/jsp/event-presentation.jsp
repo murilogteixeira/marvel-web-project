@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'event-presentation')}">
+<!DOCTYPE html>
 
 <body>
   <div class="container">

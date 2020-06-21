@@ -1,7 +1,10 @@
+
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"
-  th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}">
+<!-- <html xmlns:th="http://www.thymeleaf.org"
+th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}"> -->
 
 <body>
   <div class="container">
