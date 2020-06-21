@@ -1,9 +1,16 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'event-presentation')}">
+<html>
 
 <body>
-  <br><br><br>
+  <c:import url="layout/navbar.jsp"/>
+
+  <br>
+  <h1 style="color: white;"> Register</h1>
+  <br><br>
   <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
     <form method="POST" action="/">
       <div class="divCenter">
@@ -17,20 +24,14 @@
         <input type="password" name="txtSenha" class="roundedCornersText">
       </div><br><br>
       <!-- <div class="centerButtons"> -->
-      <button type="submit" style="text-align: center; " class="btn btn-dark btnLoginCadastrar btn-dark">
-        Logar
+      <button type="submit" style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">
+        Register
       </button></br></br>
-
-      <a href="/register">
-        <button type="button" style="text-align: center; color: white;" class="btn btn-link btnLoginCadastrar">
-          Register
-        </button>
-      </a>
       <!-- </div> -->
       <br><br>
     </form>
   </div>
-  
+
   <div class="cardHomeBottom">
     <div class="row">
       <div class="col-sm-4">

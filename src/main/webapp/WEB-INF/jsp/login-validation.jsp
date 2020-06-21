@@ -1,33 +1,24 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'event-presentation')}">
+<html>
 
 <body>
-
-  <br>
-  <h1 style="color: white;"> Register</h1>
-  <br><br>
+  <c:import url="layout/navbar.jsp"/>
+  <br><br><br>
   <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
-    <form method="POST" action="/">
-      <div class="divCenter">
-        <h3 style="color: white;">Login</h1>
-        </h3></br>
-        <input type="text" name="txtLogin" class="roundedCornersText">
-      </div></br>
-      <div class="divCenter">
-        <h3 style="color: white;">Senha</h1>
-        </h3></br>
-        <input type="password" name="txtSenha" class="roundedCornersText">
-      </div><br><br>
-      <!-- <div class="centerButtons"> -->
-      <button type="submit" style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">
-        Register
-      </button></br></br>
-      <!-- </div> -->
-      <br><br>
-    </form>
+    <h2 style="color:  #E6E6E6; text-align: center;">Error to Login</h2>
+    <h4 style="color:  #E6E6E6; text-align: center;">Please Login again...</h4>
+    
+    <br><br>
+    <a href="/login">
+        <button style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">Login</button>
+    </a>
+    <br><br>
   </div>
-
+  
   <div class="cardHomeBottom">
     <div class="row">
       <div class="col-sm-4">

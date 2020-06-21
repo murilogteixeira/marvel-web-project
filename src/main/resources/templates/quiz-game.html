@@ -27,11 +27,13 @@
         <br>
 
       <div class="row">
-        <div class="col-sm-6 text-center">
-            <div class="cardResposta">
-                <h4 style="text-align: center;" th:text="${quiz.respostas[0]}"/>
-            </div>
-        </div>
+        <a id="resposta" style="cursor:pointer;">
+          <div class="col-sm-6 text-center">
+              <div class="cardResposta">
+                  <h4 style="text-align: center;" th:text="${quiz.respostas[0]}"/>
+              </div>
+          </div>
+        </a>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
                 <h4 style="text-align: center;" th:text="${quiz.respostas[1]}"/>
