@@ -1,7 +1,12 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
+<html>
 
 <body>
+    <c:import url="navbar.jsp"/>
+
   <div class="container">
     <h1 style="color: white;">MARVEL Comics Super Fans</h1></br>
     <!--OPCOES E INFORMACOES SOBRE QUADRINHOS-->

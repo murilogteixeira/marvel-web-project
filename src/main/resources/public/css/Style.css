@@ -1,0 +1,48 @@
+h1 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+}
+
+.cardHomeTitle{
+  text-align: center;
+  padding-top: 125px;
+  padding-bottom: 125px;
+  background-color: #E6E6E6;
+  border-radius: 10px;
+  margin-top: 75px;
+}
+
+.cardHome{
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color:#151515;
+  border-radius: 10px;
+}
+
+.cardResposta{
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #E6E6E6;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+
+.cardHomeBottom{
+  text-align: center;
+  padding-top: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.copyRight{
+    margin-bottom: 10px;
+}
