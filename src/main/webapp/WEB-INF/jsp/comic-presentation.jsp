@@ -1,8 +1,12 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'comic-presentation')}">
-
+<html>
 <body>
+  <c:import url="layout/navbar.jsp"/>
+
   <div class="container">
     <div class="card">
       <div class="card-body">
@@ -11,26 +15,31 @@
         <br>
         <div class="row">
           <div class="cardHome">
-            <div th:each="record : ${records}">
-              <br>
-              <h4 style="color: #E6E6E6;"> Title: </h4>
-              <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.title}" />
-              <br>
-              <h4 style="color: #E6E6E6;"> Author(s): </h4>
-              <div th:if="${record.creators.items} != null and ${record.creators.items.isEmpty()} == false">
-                <div th:each="item : ${record.creators.items}">
-                  <h5 style="color: #E6E6E6; text-align: center;" th:text="${item.name}" />
+            <c:forEach var="record" items="${records}">
+              <div>
+                <br>
+                <h4 style="color: #E6E6E6;"> Title: </h4>
+                <h5 style="color: #E6E6E6; text-align: center;">${record.title}</h5>
+                <br>
+                <h4 style="color: #E6E6E6;"> Author(s): </h4>
+                <c:if test="${not empty record.creators.items}">
+                  <c:forEach var="item" items="${record.creators.items}">
+                    <div>
+                      <h5 style="color: #E6E6E6; text-align: center;">${item.name}</h5>
+                    </div>
+                  </c:forEach>
+                </c:if>
+                <c:if test="${empty record.creators.items}">
+                  <div>
+                    <h5 style="color: #E6E6E6; text-align: center;">UNKNOWN</h5>
+                  </div>  
+                </c:if>
+                <div class="divCenter">
+                  <img style="text-align: center;" src="${record.thumbnail.path}/portrait_incredible.${record.thumbnail.extension}"/>
                 </div>
+                <br>
               </div>
-              <div th:if="${record.creators.items} == null or ${record.creators.items.isEmpty()} == true">
-                <h5 style="color: #E6E6E6; text-align: center;" th:text="UNKNOWN" />
-              </div>
-              <div class="divCenter">
-                <img style="text-align: center;"
-                  th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}" />
-              </div>
-              <br>
-            </div>
+            </c:forEach>
           </div>
         </div>
         <br>
