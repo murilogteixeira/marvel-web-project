@@ -1,20 +1,24 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'event-presentation')}">
+<html>
 
 <body>
+  <c:import url="layout/navbar.jsp"/>
   <br><br><br>
-  <div class="container" style="align-items: center; background-color: brown; width: 50%;">
-    <form action="/" method="POST">
+  <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
+    <form method="POST" action="/home">
       <div class="divCenter">
         <h3 style="color: white;">Login</h1>
         </h3></br>
-        <input type="text" name="txtLogin" class="roundedCornersText">
+        <input type="text" name="username" class="roundedCornersText">
       </div></br>
       <div class="divCenter">
         <h3 style="color: white;">Senha</h1>
         </h3></br>
-        <input type="password" name="txtSenha" class="roundedCornersText">
+        <input type="password" name="password" class="roundedCornersText">
       </div><br><br>
       <!-- <div class="centerButtons"> -->
       <button type="submit" style="text-align: center; " class="btn btn-dark btnLoginCadastrar btn-dark">

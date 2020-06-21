@@ -1,0 +1,65 @@
+.navbar.red{
+    background-color: brown;
+    color: brown;
+}
+
+nav .navbar-nav li a{
+    color: white !important;
+}
+
+nav .navbar-header a{
+    color: white !important;
+}
+
+.fontColorNavBar{
+    color: white;
+}
+
+footer{
+    text-align: center;
+    padding: 3px;
+    color: white;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.centerButtons {
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.btnLoginCadastrar{
+    width: 120px;
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.btn-dark{
+    background-color: #343a40; 
+    color: white;
+    border-color: #343a40;
+}
+
+.roundedCorners{
+    border-radius: 10px;
+}
+
+.roundedCornersText{
+    border-radius: 5px;
+}
+
+

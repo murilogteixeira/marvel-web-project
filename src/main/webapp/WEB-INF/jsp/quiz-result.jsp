@@ -1,7 +1,11 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
+<html>
 
 <body>
+  <c:import url="layout/navbar.jsp"/>
   <div class="container">
     <h1 style="color: white;">Quiz Result</h1>
     

@@ -1,1 +1,0 @@
-web: java -jar target/marvel-web-project-1.0.jar

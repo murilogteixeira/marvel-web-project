@@ -27,35 +27,17 @@
                 </h4>
             </div>
 
-            <br>
-
-            <div class="row">
-              <a href="#" th:onclick="'javascript:showAlert(\''+${teste}+'\')'">
-              <!-- <a href="#" th:onclick="'alert(\'' +${quiz.respostas[0]}+ '\')'"> -->
-                  <div class="col-sm-6 text-center">
-                        <div class="cardResposta" th:id="fundo1">
-                            <h4 style="text-align: center;" th:text="${quiz.respostas[0]}"/>
-                        </div>
-                    </div>
-                </a>
-                <div class="col-sm-6 text-center">
-                    <div class="cardResposta">
-                        <h4 style="text-align: center;" th:text="${quiz.respostas[1]}"/>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-sm-6 text-center">
-                    <div class="cardResposta">
-                        <h4 style="text-align: center;" th:text="${quiz.respostas[2]}"/>
-                    </div>
-                </div>
-                <div class="col-sm-6 text-center">
-                    <div class="cardResposta">
-                        <h4 style="text-align: center;" th:text="${quiz.respostas[3]}"/>
-                    </div>
-                </div>
+      <div class="row">
+        <a id="resposta" style="cursor:pointer;">
+          <div class="col-sm-6 text-center">
+              <div class="cardResposta">
+                  <h4 style="text-align: center;" th:text="${quiz.respostas[0]}"/>
+              </div>
+          </div>
+        </a>
+        <div class="col-sm-6 text-center">
+            <div class="cardResposta">
+                <h4 style="text-align: center;" th:text="${quiz.respostas[1]}"/>
             </div>
         </div>
         <br><br><br>
