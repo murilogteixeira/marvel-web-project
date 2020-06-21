@@ -5,8 +5,9 @@
 
 <!-- <html xmlns:th="http://www.thymeleaf.org"
 th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}"> -->
-
+<html>
 <body>
+  <c:import url="navbar.jsp"/>
   <div class="container">
     <div class="card">
       <div class="card-body" style="color: #E6E6E6;">
