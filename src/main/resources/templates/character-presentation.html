@@ -12,28 +12,30 @@
         <br>
         <div class="cardHome">
           <ul th:each="record : ${records}">
-            <div class="card">
-              <div class="container-fluid">
-                <br>
-                <div class="row">
-                  <div class="col-sm-4">
-                    <img th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}" />
-                  </div>
-                  <div class="col-sm-8">
-                    <h4 style="color: #E6E6E6; text-align: center;"> Nome: </h4>
-                    <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.name}" />
-                    <h4 style="color: #E6E6E6; text-align: center;"> Description: </h4>
-                    <div th:if="${record.name} == null or ${record.name} == '' or ${record.name.isEmpty()} == true">
-                      <h5 style="color: #E6E6E6; text-align: center;" th:text="UNKNOWN" />
-                    </div>
-                    <div th:if="${record.name} != null or ${record.name} != '' or ${record.name.isEmpty()} == false">
-                      <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.description}" />
-                    </div>
-                  </div>
-                </div>
-                <br>
+            <br>
+            <div class="row">
+              <h4 style="color: #E6E6E6; text-align: center;"> Nome: </h4>
+              <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.name}" />
+
+              <h4 id="description" style="color: #E6E6E6; text-align: center;"></h4> 
+
+              <script>
+                var description;
+                description =  "Description:";
+                document.getElementById("description").innerHTML = record.description;
+              </script>
+
+              <div th:if="${record.name} == null or ${record.name} == '' or ${record.name.isEmpty()} == true">
+                <h5 style="color: #E6E6E6; text-align: center;" th:text="UNKNOWN" />
               </div>
+              <div class="divDescription">
+                <div th:if="${record.name} != null or ${record.name} != '' or ${record.name.isEmpty()} == false">
+                  <h5 style="color: #E6E6E6; text-align: center;" th:text="${record.description}" />
+                </div>
+              </div>
+              <img th:src="${record.thumbnail.path} + '/portrait_incredible.' + ${record.thumbnail.extension}" />
             </div>
+            <br>
           </ul>
         </div>
       </div>
