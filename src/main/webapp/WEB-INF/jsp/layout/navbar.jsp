@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="/css/home-style.css">
     <link rel="stylesheet" type="text/css" href="/css/Style.css">
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
-    <script type="text/javascript" src="/js/QuizScript.js"></script>
 </head>
 
 <body style="background-color:black;">

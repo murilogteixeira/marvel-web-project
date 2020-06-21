@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <body>
   <c:import url="layout/navbar.jsp"/>
   <div class="container">
@@ -33,56 +32,43 @@
         <br>
 
       <div class="row">
-        <div class="col-sm-6 text-center">
-            <div class="cardResposta">
-                <h4 style="text-align: center;">${quiz.respostas[0]}</h4>
+        <c:forEach var="resposta" items="${quiz.respostas}">
+          <div class="col-sm-6 text-center" name="resposta" style="cursor:pointer;" onclick="verificarResposta('${resposta}', '${quiz.respostaCerta}')">
+            <div class="cardResposta" id="${resposta == quiz.respostaCerta ? quiz.respostaCerta : resposta}">
+                <h4 style="text-align: center;">${resposta}</h4>
             </div>
-        </div>
-        <div class="col-sm-6 text-center">
-            <div class="cardResposta">
-                <h4 style="text-align: center;">${quiz.respostas[1]}</h4>
-            </div>
-        </div>
+          </div>
+        </c:forEach>
       </div>
-      <br>
-      <div class="row">
-        <div class="col-sm-6 text-center">
-            <div class="cardResposta">
-                <h4 style="text-align: center;">${quiz.respostas[2]}</h4>
-            </div>
-        </div>
-        <div class="col-sm-6 text-center">
-            <div class="cardResposta">
-                <h4 style="text-align: center;">${quiz.respostas[3]}<h4>
-            </div>
-        </div>
-      </div>
+      
     </div>
     <br><br><br>
-  <div class="container">
-    <a href="">
-      <h3 style="color: #f2ea46; text-align: right;">Next <span class="glyphicon glyphicon-menu-right"></span></h3>
-    </a>
-  </div>
-    
-    <div class="cardHomeBottom">
-      <div class="row">
-        <div class="col-sm-4">
-          <h2 style="color: white;">Heroes</h2>
-          <p style="color: white;">Get to know marvel heroes better.</p>
+    <div class="container">
+      <a href="">
+        <h3 style="color: #f2ea46; text-align: right;">Next <span class="glyphicon glyphicon-menu-right"></span></h3>
+      </a>
+    </div>
+      
+      <div class="cardHomeBottom">
+        <div class="row">
+          <div class="col-sm-4">
+            <h2 style="color: white;">Heroes</h2>
+            <p style="color: white;">Get to know marvel heroes better.</p>
+          </div>
+          <div class="col-sm-4">
+            <h2 style="color: white;" >History</h2>
+            <p style="color: white;">Learn a little more about the story of Marvel's most acclaimed heroes.</p>
         </div>
-        <div class="col-sm-4">
-          <h2 style="color: white;" >History</h2>
-          <p style="color: white;">Learn a little more about the story of Marvel's most acclaimed heroes.</p>
-       </div>
-        <div class="col-sm-4">
-          <h2 style="color: white;">Comics</h2>
-          <p style="color: white;">Discover new things about this great universe.</p>
+          <div class="col-sm-4">
+            <h2 style="color: white;">Comics</h2>
+            <p style="color: white;">Discover new things about this great universe.</p>
+          </div>
         </div>
-      </div>
-   </div>
+    </div>
 
-  <hr>
+    <hr>
+
+  </div>
 
   <footer>
     <br>
@@ -90,7 +76,7 @@
     <br>
   </footer>
 
-  </div>
+  <script type="text/javascript" src="/js/quizGame.js"></script>
 </body>
 
 </html>
