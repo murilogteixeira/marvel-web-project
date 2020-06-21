@@ -2,42 +2,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
+<html>
 
 <body>
+  <c:import url="layout/navbar.jsp"/>
   <div class="container">
     <h1 style="color: white;">Quiz</h1>
-    </br>
+    <br>
     
     <div class="container"> 
         <h3 style="color: #E6E6E6;">
-            <span th:text="${quiz.pergunta}"/>
+            <span>${quiz.pergunta}</span>
         </h3>
 
         <br>
 
-        <div th:if="${quiz.conteudoIsImage} == true">
+        <c:if test="${quiz.conteudoIsImage}">
             <div class="cardHomeBottom">
-                <img th:src="${quiz.conteudo}"/>
+                <img src="${quiz.conteudo}"/>
             </div>
-        </div>
-        <div th:if="${quiz.conteudoIsImage} == false">
-            <h3 style="color: #f2ea46;">
-                <span th:text="${quiz.conteudo}"/>
-            </h4>
-        </div>
-        
+        </c:if>
+        <c:if test="${!quiz.conteudoIsImage}">
+          <div>
+              <h3 style="color: #f2ea46;">
+                  <span>${quiz.conteudo}</span>
+              </h4>
+          </div>
+        </c:if>
+
         <br>
 
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <h4 style="text-align: center;" th:text="${quiz.respostas[0]}"/>
+                <h4 style="text-align: center;">${quiz.respostas[0]}</h4>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <h4 style="text-align: center;" th:text="${quiz.respostas[1]}"/>
+                <h4 style="text-align: center;">${quiz.respostas[1]}</h4>
             </div>
         </div>
       </div>
@@ -45,12 +48,12 @@
       <div class="row">
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <h4 style="text-align: center;" th:text="${quiz.respostas[2]}"/>
+                <h4 style="text-align: center;">${quiz.respostas[2]}</h4>
             </div>
         </div>
         <div class="col-sm-6 text-center">
             <div class="cardResposta">
-                <h4 style="text-align: center;" th:text="${quiz.respostas[3]}"/>
+                <h4 style="text-align: center;">${quiz.respostas[3]}<h4>
             </div>
         </div>
       </div>

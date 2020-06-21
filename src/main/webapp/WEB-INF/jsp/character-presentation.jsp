@@ -7,7 +7,7 @@
 th:replace="~{fragments/layout :: layout (~{::body},'character-presentation')}"> -->
 <html>
 <body>
-  <c:import url="navbar.jsp"/>
+  <c:import url="layout/navbar.jsp"/>
   <div class="container">
     <div class="card">
       <div class="card-body" style="color: #E6E6E6;">

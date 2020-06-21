@@ -5,7 +5,7 @@
 <html>
 
 <body>
-  <c:import url="navbar.jsp" />
+  <c:import url="layout/navbar.jsp" />
 
   <div class="container">
     <h1 style="color: white;">MARVEL Comics Super Fans</h1></br>
