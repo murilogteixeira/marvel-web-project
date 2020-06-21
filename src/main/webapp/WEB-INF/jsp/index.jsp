@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
