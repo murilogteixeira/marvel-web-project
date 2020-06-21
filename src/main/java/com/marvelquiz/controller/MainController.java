@@ -53,6 +53,12 @@ public class MainController {
         return "login-presentation";
     }
 
+    @RequestMapping("/forgotPassword")
+    public String loginError(Map<String, Object> model) {
+        model.put("activeTab", "login");
+        return "forgot-password";
+    }
+
     @RequestMapping("/register")
     public String register(Map<String, Object> model) {
         model.put("activeTab", "register");
@@ -479,8 +485,8 @@ public class MainController {
         // int total = 75;
 
         UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme(scheme).host(host)
-        // .scheme("http").host("localhost").port(5000)     
+        // .scheme(scheme).host(host)
+        .scheme("http").host("localhost").port(5000)     
         .path("/api/events")
         .queryParam("limit", limite)
         .queryParam("offset", randomInt(limite, total))
