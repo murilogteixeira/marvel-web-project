@@ -3,9 +3,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'event-presentation')}">
+<html>
 
 <body>
+  <c:import url="layout/navbar.jsp"/>
 
   <br>
   <h1 style="color: white;"> Register</h1>
