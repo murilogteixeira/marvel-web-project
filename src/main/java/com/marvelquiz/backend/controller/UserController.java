@@ -37,6 +37,15 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @RequestMapping(value = "/api/user/{username}", method = RequestMethod.GET)
+    public ResponseEntity<User> findByUsername(@PathVariable(value = "username") String username) {
+        Optional<User> user = service.findByUsername(username);
+        if (user.isPresent())
+            return new ResponseEntity<User>(user.get(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @RequestMapping(value = "/api/user", method = RequestMethod.POST)
     public User save(@Valid @RequestBody User user) {
         return service.save(user);
@@ -48,6 +57,21 @@ public class UserController {
         if (oldUser.isPresent()) {
             User user = oldUser.get();
             user.setUsername(newPessoa.getUsername());
+            user.setPassword(newPessoa.getPassword());
+            user.setScore(newPessoa.getScore());
+            user.setRightAnswerPercent(newPessoa.getRightAnswerPercent());
+            user.setWrongAnswerPercent(newPessoa.getWrongAnswerPercent());
+            service.save(user);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(value = "/api/user/{username}", method = RequestMethod.PUT)
+    public ResponseEntity<User> updatePassword(@PathVariable(value = "username") String username, @Valid @RequestBody User newPessoa) {
+        Optional<User> oldUser = service.findByUsername(username);
+        if (oldUser.isPresent()) {
+            User user = oldUser.get();
             user.setPassword(newPessoa.getPassword());
             service.save(user);
             return new ResponseEntity<User>(user, HttpStatus.OK);

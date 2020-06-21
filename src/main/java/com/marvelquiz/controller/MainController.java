@@ -48,6 +48,12 @@ public class MainController {
         return "login-presentation";
     }
 
+    @RequestMapping("/forgotPassword")
+    public String loginError(Map<String, Object> model) {
+        model.put("activeTab", "login");
+        return "forgot-password";
+    }
+
     @RequestMapping("/register")
     public String register(Map<String, Object> model) {
         model.put("activeTab", "register");
