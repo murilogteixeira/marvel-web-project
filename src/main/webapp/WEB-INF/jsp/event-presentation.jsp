@@ -20,24 +20,24 @@
                   <div class="col-sm-4">
                     <img src="${record.thumbnail.path}/portrait_incredible.${record.thumbnail.extension}" />
                   </div>
-                  <div class="col-sm-8">
-                    <h4 style="color: #E6E6E6;"> Title: </h4>
-                    <h5 style="color: #E6E6E6; text-align: center;">
+                  <div class="col-sm-8" style="margin-top: -13px;">
+                    <h4 style="color: #E6E6E6; text-align: start;"> Title: </h4>
+                    <h5 style="color: #E6E6E6; text-align: start;">
                       ${record.title}
                     </h5>
                     <br>
-                    <h4 style="color: #E6E6E6;"> Start date: </h4>
-                    <h5 style="color: #E6E6E6; text-align: center;">
+                    <h4 style="color: #E6E6E6; text-align: start;"> Start date: </h4>
+                    <h5 style="color: #E6E6E6; text-align: start;">
                       ${record.start}
                     </h5>
                     <br>
-                    <h4 style="color: #E6E6E6;"> End date: </h4>
-                    <h5 style="color: #E6E6E6; text-align: center;">
+                    <h4 style="color: #E6E6E6; text-align: start;"> End date: </h4>
+                    <h5 style="color: #E6E6E6; text-align: start;">
                       ${record.end}
                     </h5>
                     <br>
-                    <h4 style="color: #E6E6E6;"> Description: </h4>
-                    <h5 style="color: #E6E6E6; text-align: center;">
+                    <h4 style="color: #E6E6E6; text-align: start;"> Description: </h4>
+                    <h5 style="color: #E6E6E6; text-align: start;">
                       ${record.description}
                     </h5>
                   </div>
