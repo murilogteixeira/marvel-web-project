@@ -208,22 +208,30 @@ public class MainController {
 
     final String characterRequestMapping = "/characters";
     @RequestMapping(characterRequestMapping)
-    public String chacarterPresentation(Map<String, Object> model) {
+    public String chacarterPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
         System.out.println("Request: " + characterRequestMapping);
         model.put("activeTab", "characters");
         ArrayList<Character> resultados = getCharacters(20, 1000);
         model.put("records", resultados);
+
+        System.out.println("isLogged: " + isLogged);
+
+        model.put("isLogged", isLogged);
         return "character-presentation";
     }
 
     final String comicsRequestMapping = "/comics";
     @RequestMapping(comicsRequestMapping)
-    public String comicsPresentation(Map<String, Object> model) {
+    public String comicsPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
         System.out.println("Request: " + comicsRequestMapping);
         model.put("activeTab", "comics");
         ArrayList<Comic> resultados = getComicsResults(20, 70000);
         ArrayList<String> creatorsArray = new ArrayList<String>();
         model.put("records", resultados);
+        
+        System.out.println("isLogged: " + isLogged);
+
+        model.put("isLogged", isLogged);
 
         for (Comic resultado : resultados) {
             ArrayList<Items> items = resultado.getCreators().getItems();
@@ -245,11 +253,14 @@ public class MainController {
 
     final String eventsRequestMapping = "/events";
     @RequestMapping(eventsRequestMapping)
-    public String eventPresentation(Map<String, Object> model) {
+    public String eventPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
         System.out.println("Request: " + eventsRequestMapping);
         model.put("activeTab", "events");
         ArrayList<Event> resultados = getEventResults(10, 30);
         model.put("records", resultados);
+        System.out.println("isLogged: " + isLogged);
+
+        model.put("isLogged", isLogged);
         return "event-presentation";
     }
 

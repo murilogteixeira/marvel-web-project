@@ -33,19 +33,19 @@
                     </a>
                 </li>
                 <li class="${activeTab == 'characters' ? 'active' : null}">
-                    <a class="nav-link" href="/characters">
+                    <a class="nav-link" href="/characters?isLogged=false">
                         <span class="glyphicon glyphicon-user"></span>
                         Characters
                     </a>
                 </li>
                 <li class="${activeTab == 'events' ? 'active' : null}">
-                    <a class="nav-link" href="/events">
+                    <a class="nav-link" href="/events?isLogged=false">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         Events
                     </a>
                 </li>
                 <li class="${activeTab == 'comics' ? 'active' : null}">
-                    <a class="nav-link" href="/comics">
+                    <a class="nav-link" href="/comics?isLogged=false">
                         <span class="glyphicon glyphicon-book"></span>
                         Comics
                     </a>

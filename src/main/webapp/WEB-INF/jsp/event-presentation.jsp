@@ -4,7 +4,13 @@
 <!DOCTYPE html>
 
 <body>
-  <c:import url="layout/navbar.jsp"/>
+  <c:if test="${isLogged == true}">
+      <c:import url="layout/navbar-logged.jsp"/>
+    </c:if> 
+    <c:if test="${isLogged == false}">
+      <c:import url="layout/navbar.jsp"/>
+    </c:if>
+
   <div class="container">
     <div class="card">
       <div class="card-body">
