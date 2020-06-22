@@ -14,12 +14,12 @@
   <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
     <form method="POST" action="/signIn">
       <div class="divCenter">
-        <h3 style="color: white;">Login</h1>
+        <h3 style="color: white;">Username</h1>
         </h3></br>
         <input type="text" name="txtusername" class="roundedCornersText">
       </div></br>
       <div class="divCenter">
-        <h3 style="color: white;">Senha</h1>
+        <h3 style="color: white;">Password</h1>
         </h3></br>
         <input type="password" name="txtpassword" class="roundedCornersText">
       </div><br><br>

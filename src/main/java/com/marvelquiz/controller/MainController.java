@@ -65,7 +65,7 @@ public class MainController {
     }
 
     @RequestMapping(value = {"/home"}, method = RequestMethod.POST)
-    public String loginError(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public String loginError(@RequestParam("user") String username, @RequestParam("senha") String password) {
         User user = new User();
         user.setPassword(password);
         user.setUsername(username);

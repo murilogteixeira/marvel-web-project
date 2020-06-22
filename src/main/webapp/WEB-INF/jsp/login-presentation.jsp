@@ -16,7 +16,7 @@
         <input type="text" name="user" class="roundedCornersText">
       </div></br>
       <div class="divCenter">
-        <h3 style="color: white;">Senha</h1>
+        <h3 style="color: white;">Password</h1>
         </h3></br>
         <input type="password" name="senha" class="roundedCornersText">
       </div><br><br>

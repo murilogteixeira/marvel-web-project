@@ -52,6 +52,9 @@ public class UserController {
         User user = new User();
         user.setPassword(password);
         user.setUsername(username);
+        user.setScore(0);
+        user.setRightAnswerPercent(0);
+        user.setWrongAnswerPercent(0);
         return service.save(user);
     }
 
