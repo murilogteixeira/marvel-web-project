@@ -1,9 +1,9 @@
 function verificarResposta(resposta, respostaCerta) {
-    var retorno = false
+    var respostaCorreta = false
     if (resposta == respostaCerta) {
         var fundo = document.getElementById(resposta)
         fundo.style.backgroundColor = "green";
-        retorno = true;
+        respostaCorreta = true;
     } else {
         var fundoResposta = document.getElementById(resposta)
         var fundoRespostaCerta = document.getElementById(respostaCerta)
@@ -11,14 +11,28 @@ function verificarResposta(resposta, respostaCerta) {
         fundoRespostaCerta.style.backgroundColor = "green";
     }
 
-    var respostas = document.getElementsByName('resposta');
-    respostas.forEach(desabilitarDivs);
-
-    return retorno;
-}
-
-function desabilitarDivs(item) {
-    item.onclick = function() {
-        return false;
+    if (respostaCorreta) {
+        var acertos = sessionStorage.getItem('acertos');
+        if(acertos == null) {
+            sessionStorage.setItem('acertos', 1);
+        } else {
+            sessionStorage.setItem('acertos', ++acertos);
+        }
     }
+    
+    var perguntas = sessionStorage.getItem('perguntas');
+    if(perguntas == null) {
+        sessionStorage.setItem('perguntas', 1);
+    } else {
+        sessionStorage.setItem('perguntas', ++perguntas);
+    }
+
+    var respostas = document.getElementsByName('resposta');
+    respostas.forEach((div) => {
+        div.onclick = function() {
+            return false;
+        }
+    });
+
+    return respostaCorreta;
 }

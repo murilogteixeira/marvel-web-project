@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +34,7 @@
       <div class="row">
         <c:forEach var="resposta" items="${quiz.respostas}">
           <div class="col-sm-6 text-center" name="resposta" style="cursor:pointer;" onclick="verificarResposta('${resposta}', '${quiz.respostaCerta}')">
-            <div class="cardResposta" id="${resposta == quiz.respostaCerta ? quiz.respostaCerta : resposta}">
+            <div class="cardResposta" id="${resposta}">
                 <h4 style="text-align: center;">${resposta}</h4>
             </div>
           </div>

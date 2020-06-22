@@ -6,29 +6,26 @@
 
 <body>
   <c:import url="layout/navbar.jsp"/>
+
   <div class="container">
     <h1 style="color: white;">Quiz Result</h1>
     
     </br>
 
+   <input type="hidden" id="scoreUser" value="${user.score}">
+
     <h3 style="color: #f2ea46;"> Score: </h3>
-    <h3 style="color: #E6E6E6;">
-        50
-    </h3>
+    <h3 style="color: #E6E6E6;" id="score">50</h3>
 
     <br>
 
     <h3 style="color: #E6E6E6;"> Right Answers: </h3>
-    <h3 style="color: green;">
-        50%
-    </h3>
+    <h3 style="color: green;" id="rightAnswers">50%</h3>
 
     <br>
 
     <h3 style="color: #E6E6E6;"> Wrong Answers: </h3>
-    <h3 style="color: red">
-        50%
-    </h3>
+    <h3 style="color: red" id="wrongAnswers">50%</h3>
     
     <div class="cardHomeBottom">
       <div class="row">
@@ -56,6 +53,8 @@
   </footer>
 
   </div>
+
+  <script type="text/javascript" src="/js/quizResult.js"></script>
 </body>
 
 </html>
