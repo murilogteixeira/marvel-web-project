@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @RequestMapping(value = "/api/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public List<User> findAll() {
         return service.findAll();
     }
@@ -38,8 +38,8 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/api/user/{username}", method = RequestMethod.GET)
-    public ResponseEntity<User> findByUsername(@PathVariable(value = "username") String username) {
+    @RequestMapping(value = "/api/user", method = RequestMethod.GET)
+    public ResponseEntity<User> findByUsername(@RequestParam(value = "username") String username) {
         Optional<User> user = service.findByUsername(username);
         if (user.isPresent())
             return new ResponseEntity<User>(user.get(), HttpStatus.OK);

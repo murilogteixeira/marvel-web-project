@@ -1,4 +1,6 @@
-$(document).ready(function(){
+import request from './http-request.js';
+
+$(document).ready(function () {
     var scoreUser = parseInt(document.getElementById('scoreUser'));
     var score = document.getElementById('score');
     var rightAnswers = document.getElementById('rightAnswers');
@@ -16,5 +18,19 @@ $(document).ready(function(){
     scoreUser = isNaN(scoreUser) ? acertos : scoreUser += acertos;
 
     score.innerHTML = scoreUser;
-    
-  });
+
+    getUser((user) => {
+        console.log(user);
+    });
+});
+
+function getUser(retorno) {
+    const method = 'GET';
+    const url = 'https://marvel-web-project.herokuapp.com/api/user/username';
+    const params = new URLSearchParams({username: sessionStorage.getItem('username')}).toString();
+    const callback = (data) => {
+        retorno(data)
+    };
+
+    request(method, url, params, callback);
+}

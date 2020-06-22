@@ -1,4 +1,4 @@
-package com.marvelquiz.backend.service.interfaces;
+package com.marvelquiz.backend.service;
 
 import java.util.List;
 import java.util.Optional;
