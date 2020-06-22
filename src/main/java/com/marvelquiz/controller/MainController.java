@@ -210,7 +210,6 @@ public class MainController {
         
         if (quizCount == 8) {
             quizCount = 0;
-            model.put("activeTab", "quiz");
 
             return "redirect:/result";
         }
@@ -261,6 +260,7 @@ public class MainController {
         // Retrieve do banco
 
         model.put("records", result);
+        model.put("user", result);
         return "quiz-result";
     }
 
@@ -532,7 +532,6 @@ public class MainController {
         // int limite = 10;
         //total de records na api
         // int total = 70000;
-        
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme(scheme).host(host)
         // .scheme("http").host("localhost").port(5000)
@@ -548,7 +547,7 @@ public class MainController {
             System.out.println(ts + " " + entity.getStatusCode());
             return entity.getBody().getResults();
         } catch (RestClientException e) {
-            System.out.println(e);
+            System.out.println(e.getLocalizedMessage());
             return null;
         }
     }
