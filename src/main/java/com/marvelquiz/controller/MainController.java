@@ -1,7 +1,6 @@
 package com.marvelquiz.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -33,8 +30,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -56,6 +51,12 @@ public class MainController {
     public String index(Map<String, Object> model) {
         model.put("activeTab", "home");
         return "index";
+    }
+
+    @RequestMapping("/logged")
+    public String indexLogged(Map<String, Object> model) {
+        model.put("activeTab", "home");
+        return "index-logged";
     }
 
     @RequestMapping("/login")
@@ -94,11 +95,11 @@ public class MainController {
             if (responseEntity.getStatusCode() == HttpStatus.OK) {
                 return "index";
             } else {
-                return "login-validation";
+                return "error-page";
             }
         } catch (RestClientException e) {
             System.out.println(e.getLocalizedMessage());
-            return "login-validation";
+            return "error-page";
         }
     }
 
@@ -143,6 +144,47 @@ public class MainController {
         } catch (RestClientException e) {
             System.out.println(e.getLocalizedMessage());
             return "register-validation";
+        }
+    }
+
+    @RequestMapping("/newPassword")
+    public String newPassword(Map<String, Object> model) {
+        model.put("activeTab", "login");
+        return "update-password";
+    }
+
+    @RequestMapping(value = {"/login/page"}, method = RequestMethod.POST)
+    public String updatePassword(@RequestParam("usuario") String username, @RequestParam("senhaNovo") String newPassword) {
+
+        UriComponents uri = UriComponentsBuilder.newInstance()
+        .scheme("http").host("localhost").port(5000)     
+        .path("/api/user/newPassword")
+        .build();
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+            map.add("username", username);
+            map.add("password", newPassword);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+
+            System.out.println("->User: " + username + " ->Password: " + newPassword);
+
+            ResponseEntity<User> userUpadated = restTemplate.postForEntity(uri.toString(), request, User.class);
+
+            if (userUpadated.getStatusCode() == HttpStatus.OK) {
+                return "login-presentation";
+            } else {
+                return "error-page";
+            }
+        } catch (RestClientException e) {
+            System.out.println(e.getLocalizedMessage());
+            return "error-page";
         }
     }
 

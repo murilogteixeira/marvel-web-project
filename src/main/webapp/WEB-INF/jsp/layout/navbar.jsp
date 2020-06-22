@@ -54,7 +54,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-right" class="${activeTab == 'login' ? 'active' : null}">
                     <a class="nav-link" href="/login">
-                        <span class="glyphicon glyphicon-book"></span> 
+                        <span class="glyphicon glyphicon-log-in"></span> 
                         Login
                     </a>
                 </li>
