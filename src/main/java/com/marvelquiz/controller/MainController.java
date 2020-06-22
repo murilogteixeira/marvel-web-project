@@ -1,19 +1,19 @@
 package com.marvelquiz.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.marvelquiz.backend.model.ApiResponse;
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
@@ -33,8 +33,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -44,9 +42,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 //Main Controller 
 @Controller
 public class MainController {
-
-    // @Autowired
-    // private PessoaService service;
 
     private String scheme = "https";
     private String host = "marvel-web-project.herokuapp.com";
@@ -64,15 +59,27 @@ public class MainController {
         return "login-presentation";
     }
 
-    @RequestMapping(value = {"/home"}, method = RequestMethod.POST)
-    public String loginError(@RequestParam("username") String username, @RequestParam("password") String password) {
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest req) {
+        req.getSession().setAttribute("username", null);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/register")
+    public String register(Map<String, Object> model) {
+        model.put("activeTab", "register");
+        return "register-presentation";
+    }
+
+    @RequestMapping(value = {"/signIn"}, method = RequestMethod.POST)
+    public String registerUser(@RequestParam("txtusername") String username, @RequestParam("txtpassword") String password) {
         User user = new User();
         user.setPassword(password);
         user.setUsername(username);
 
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme("http").host("localhost").port(5000)     
-        .path("/api/login")
+        .path("/api/user")
         .build();
 
         try {
@@ -89,41 +96,59 @@ public class MainController {
 
             System.out.println("User: " + user.getUsername() + "Password: " + user.getPassword());
 
-            ResponseEntity<ApiResponse> responseEntity = restTemplate.postForEntity(uri.toString(), request, ApiResponse.class);
+            ResponseEntity<User> userCreated = restTemplate.postForEntity(uri.toString(), request, User.class);
 
-            if (responseEntity.getStatusCode() == HttpStatus.OK) {
-                return "index";
+            if (userCreated != null) {
+                return "login-presentation";
             } else {
-                return "login-validation";
+                return "register-validation";
             }
         } catch (RestClientException e) {
             System.out.println(e.getLocalizedMessage());
-            return "login-validation";
+            return "register-validation";
         }
     }
 
-    @RequestMapping("/register")
-    public String register(Map<String, Object> model) {
-        model.put("activeTab", "register");
-        return "register-presentation";
+    @RequestMapping("/newPassword")
+    public String newPassword(Map<String, Object> model) {
+        model.put("activeTab", "login");
+        return "update-password";
     }
 
-    // @RequestMapping("/db")
-    // public String getDB(Map<String, Object> model) {
+    @RequestMapping(value = {"/login/page"}, method = RequestMethod.POST)
+    public String updatePassword(@RequestParam("usuario") String username, @RequestParam("senhaNovo") String newPassword) {
 
-    //     List<Pessoa> lista = service.findAll();
+        UriComponents uri = UriComponentsBuilder.newInstance()
+        .scheme("http").host("localhost").port(5000)     
+        .path("/api/user/newPassword")
+        .build();
 
-    //     if (lista != null && !lista.isEmpty()) {
-    //         List<String> output = new ArrayList<>();
-    //         for (Pessoa p : lista) {
-    //             output.add(p.toString());
-    //         }
-    //         model.put("records", output);
-    //         return "db";
-    //     } else
-    //         model.put("message", "No items found");
-    //     return "error";
-    // }
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+            map.add("username", username);
+            map.add("password", newPassword);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+
+            System.out.println("->User: " + username + " ->Password: " + newPassword);
+
+            ResponseEntity<User> userUpadated = restTemplate.postForEntity(uri.toString(), request, User.class);
+
+            if (userUpadated.getStatusCode() == HttpStatus.OK) {
+                return "login-presentation";
+            } else {
+                return "error-page";
+            }
+        } catch (RestClientException e) {
+            System.out.println(e.getLocalizedMessage());
+            return "error-page";
+        }
+    }
 
     final String characterRequestMapping = "/characters";
     @RequestMapping(characterRequestMapping)
@@ -177,7 +202,6 @@ public class MainController {
         
         if (quizCount == 8) {
             quizCount = 0;
-            model.put("activeTab", "quiz");
 
             return "redirect:/result";
         }
@@ -228,6 +252,7 @@ public class MainController {
         // Retrieve do banco
 
         model.put("records", result);
+        model.put("user", result);
         return "quiz-result";
     }
 
@@ -499,7 +524,6 @@ public class MainController {
         // int limite = 10;
         //total de records na api
         // int total = 70000;
-        
         UriComponents uri = UriComponentsBuilder.newInstance()
         .scheme(scheme).host(host)
         // .scheme("http").host("localhost").port(5000)
@@ -515,7 +539,7 @@ public class MainController {
             System.out.println(ts + " " + entity.getStatusCode());
             return entity.getBody().getResults();
         } catch (RestClientException e) {
-            System.out.println(e);
+            System.out.println(e.getLocalizedMessage());
             return null;
         }
     }

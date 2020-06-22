@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 
 <body>
-  <c:import url="layout/navbar.jsp"/>
+    <c:import url="layout/navbar.jsp"/>
+
   <div class="container">
     <div class="card">
       <div class="card-body">

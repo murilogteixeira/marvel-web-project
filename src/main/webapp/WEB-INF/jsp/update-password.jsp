@@ -9,14 +9,24 @@
   <c:import url="layout/navbar.jsp"/>
   <br><br><br>
   <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
-    <h2 style="color:  #E6E6E6; text-align: center;">Error to Login</h2>
-    <h4 style="color:  #E6E6E6; text-align: center;">Please Login again...</h4>
-    
-    <br><br>
-    <a href="/login">
-        <button style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">Login</button>
-    </a>
-    <br><br>
+    <form method="POST" action="/login/page">
+      <div class="divCenter">
+        <h3 style="color: white;">Username</h3><br>
+        <input type="text" name="usuario" class="roundedCornersText">
+      </div>
+      <div class="divCenter">
+        <h3 style="color: white;">New Password</h3><br>
+        <input type="password" name="senhaNovo" class="roundedCornersText">
+      </div>
+
+      <br><br>
+
+      <button type="submit" style="text-align: center; color: white;" class="btn btn-dark btnLoginCadastrar">
+        Update
+      </button>
+      
+      <br><br>
+    </form>
   </div>
   
   <div class="cardHomeBottom">

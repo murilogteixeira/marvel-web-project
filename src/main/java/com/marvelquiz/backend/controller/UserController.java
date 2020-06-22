@@ -11,19 +11,22 @@ import com.marvelquiz.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
 
     @Autowired
     private UserService service;
 
-    @RequestMapping(value = "/api/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public List<User> findAll() {
         return service.findAll();
     }
@@ -37,8 +40,8 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/api/user/{username}", method = RequestMethod.GET)
-    public ResponseEntity<User> findByUsername(@PathVariable(value = "username") String username) {
+    @RequestMapping(value = "/api/user", method = RequestMethod.GET)
+    public ResponseEntity<User> findByUsername(@RequestParam(value = "username") String username) {
         Optional<User> user = service.findByUsername(username);
         if (user.isPresent())
             return new ResponseEntity<User>(user.get(), HttpStatus.OK);
@@ -47,7 +50,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/api/user", method = RequestMethod.POST)
-    public User save(@Valid @RequestBody User user) {
+    public User save(@Valid @RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+        User user = new User();
+        user.setPassword(password);
+        user.setUsername(username);
+        user.setScore(0);
+        user.setRightAnswerPercent(0);
+        user.setWrongAnswerPercent(0);
         return service.save(user);
     }
 
@@ -67,12 +76,12 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/api/user/{username}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updatePassword(@PathVariable(value = "username") String username, @Valid @RequestBody User newPessoa) {
+    @RequestMapping(value = "/api/user/newPassword", method = RequestMethod.POST)
+    public ResponseEntity<User> updatePassword(@Valid @RequestParam(value = "username") String username, @RequestParam(value = "password") String newPassword) {
         Optional<User> oldUser = service.findByUsername(username);
         if (oldUser.isPresent()) {
             User user = oldUser.get();
-            user.setPassword(newPessoa.getPassword());
+            user.setPassword(newPassword);
             service.save(user);
             return new ResponseEntity<User>(user, HttpStatus.OK);
         } else

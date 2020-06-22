@@ -7,31 +7,18 @@
 
 <body>
   <c:import url="layout/navbar.jsp"/>
-
-  <br>
-  <h1 style="color: white;"> Register</h1>
-  <br><br>
+  <br><br><br>
   <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
-    <form method="POST" action="/signIn">
-      <div class="divCenter">
-        <h3 style="color: white;">Username</h1>
-        </h3></br>
-        <input type="text" name="txtusername" class="roundedCornersText">
-      </div></br>
-      <div class="divCenter">
-        <h3 style="color: white;">Password</h1>
-        </h3></br>
-        <input type="password" name="txtpassword" class="roundedCornersText">
-      </div><br><br>
-      <!-- <div class="centerButtons"> -->
-      <button type="submit" style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">
-        Register
-      </button></br></br>
-      <!-- </div> -->
-      <br><br>
-    </form>
+    <h2 style="color:  #E6E6E6; text-align: center;">Error to Register</h2>
+    <h4 style="color:  #E6E6E6; text-align: center;">Please Register again...</h4>
+    
+    <br><br>
+    <a href="/register">
+        <button style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">Register</button>
+    </a>
+    <br><br>
   </div>
-
+  
   <div class="cardHomeBottom">
     <div class="row">
       <div class="col-sm-4">

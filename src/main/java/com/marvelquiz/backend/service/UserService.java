@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.marvelquiz.backend.repository.UserRepository;
-import com.marvelquiz.backend.service.interfaces.ServiceInterface;
 import com.marvelquiz.bean.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
