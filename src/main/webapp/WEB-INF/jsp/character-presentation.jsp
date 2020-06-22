@@ -25,15 +25,12 @@
                 </c:when>
               </c:choose> 
 
-              <c:choose> 
-                <c:when test="${record.name != null} || ${record.name != ''} || ${record.name.isEmpty() == false}">
-                  <h4 id="description" style="color: #E6E6E6; text-align: center;">Description: </h4>
-                
-                  <div class="divDescription">
-                    <h5 style="color: #E6E6E6; text-align: center;">${record.description}</h5>
-                  </div>
-                </c:when>
-              </c:choose> 
+              <c:if test="${record.description != ''}">
+                <h4 id="description" style="color: #E6E6E6; text-align: center;">Description: </h4>
+                <div class="divDescription">
+                  <h5 style="color: #E6E6E6; text-align: center;">${record.description}</h5>
+                </div>
+              </c:if>
               
               <div class="divCenter">
                 <img style="text-align: center;" src="${record.thumbnail.path}/portrait_incredible.${record.thumbnail.extension}"/>
