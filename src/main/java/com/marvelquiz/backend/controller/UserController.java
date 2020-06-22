@@ -74,12 +74,12 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/api/user/{username}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updatePassword(@PathVariable(value = "username") String username, @Valid @RequestBody User newPessoa) {
+    @RequestMapping(value = "/api/user/newPassword", method = RequestMethod.POST)
+    public ResponseEntity<User> updatePassword(@Valid @RequestParam(value = "username") String username, @RequestParam(value = "password") String newPassword) {
         Optional<User> oldUser = service.findByUsername(username);
         if (oldUser.isPresent()) {
             User user = oldUser.get();
-            user.setPassword(newPessoa.getPassword());
+            user.setPassword(newPassword);
             service.save(user);
             return new ResponseEntity<User>(user, HttpStatus.OK);
         } else

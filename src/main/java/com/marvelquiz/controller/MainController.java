@@ -3,6 +3,7 @@ package com.marvelquiz.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +54,12 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/logged")
+    public String indexLogged(Map<String, Object> model) {
+        model.put("activeTab", "home");
+        return "index-logged";
+    }
+
     @RequestMapping("/login")
     public String login(Map<String, Object> model) {
         model.put("activeTab", "login");
@@ -87,13 +94,13 @@ public class MainController {
             ResponseEntity<ApiResponse> responseEntity = restTemplate.postForEntity(uri.toString(), request, ApiResponse.class);
 
             if (responseEntity.getStatusCode() == HttpStatus.OK) {
-                return "index";
+                return "index-logged";
             } else {
-                return "login-validation";
+                return "error-page";
             }
         } catch (RestClientException e) {
             System.out.println(e.getLocalizedMessage());
-            return "login-validation";
+            return "error-page";
         }
     }
 
@@ -141,6 +148,47 @@ public class MainController {
         }
     }
 
+    @RequestMapping("/newPassword")
+    public String newPassword(Map<String, Object> model) {
+        model.put("activeTab", "login");
+        return "update-password";
+    }
+
+    @RequestMapping(value = {"/login/page"}, method = RequestMethod.POST)
+    public String updatePassword(@RequestParam("usuario") String username, @RequestParam("senhaNovo") String newPassword) {
+
+        UriComponents uri = UriComponentsBuilder.newInstance()
+        .scheme("http").host("localhost").port(5000)     
+        .path("/api/user/newPassword")
+        .build();
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+            map.add("username", username);
+            map.add("password", newPassword);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+
+            System.out.println("->User: " + username + " ->Password: " + newPassword);
+
+            ResponseEntity<User> userUpadated = restTemplate.postForEntity(uri.toString(), request, User.class);
+
+            if (userUpadated.getStatusCode() == HttpStatus.OK) {
+                return "login-presentation";
+            } else {
+                return "error-page";
+            }
+        } catch (RestClientException e) {
+            System.out.println(e.getLocalizedMessage());
+            return "error-page";
+        }
+    }
+
     // @RequestMapping("/db")
     // public String getDB(Map<String, Object> model) {
 
@@ -160,22 +208,30 @@ public class MainController {
 
     final String characterRequestMapping = "/characters";
     @RequestMapping(characterRequestMapping)
-    public String chacarterPresentation(Map<String, Object> model) {
+    public String chacarterPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
         System.out.println("Request: " + characterRequestMapping);
         model.put("activeTab", "characters");
         ArrayList<Character> resultados = getCharacters(20, 1000);
         model.put("records", resultados);
+
+        System.out.println("isLogged: " + isLogged);
+
+        model.put("isLogged", isLogged);
         return "character-presentation";
     }
 
     final String comicsRequestMapping = "/comics";
     @RequestMapping(comicsRequestMapping)
-    public String comicsPresentation(Map<String, Object> model) {
+    public String comicsPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
         System.out.println("Request: " + comicsRequestMapping);
         model.put("activeTab", "comics");
         ArrayList<Comic> resultados = getComicsResults(20, 70000);
         ArrayList<String> creatorsArray = new ArrayList<String>();
         model.put("records", resultados);
+        
+        System.out.println("isLogged: " + isLogged);
+
+        model.put("isLogged", isLogged);
 
         for (Comic resultado : resultados) {
             ArrayList<Items> items = resultado.getCreators().getItems();
@@ -197,11 +253,14 @@ public class MainController {
 
     final String eventsRequestMapping = "/events";
     @RequestMapping(eventsRequestMapping)
-    public String eventPresentation(Map<String, Object> model) {
+    public String eventPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
         System.out.println("Request: " + eventsRequestMapping);
         model.put("activeTab", "events");
         ArrayList<Event> resultados = getEventResults(10, 30);
         model.put("records", resultados);
+        System.out.println("isLogged: " + isLogged);
+
+        model.put("isLogged", isLogged);
         return "event-presentation";
     }
 
