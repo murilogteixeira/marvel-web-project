@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <c:import url="layout/navbar-logged.jsp"/>
+  <c:import url="layout/navbar.jsp"/>
   <div class="container">
     <h1 style="color: white;">Quiz</h1>
     <br>

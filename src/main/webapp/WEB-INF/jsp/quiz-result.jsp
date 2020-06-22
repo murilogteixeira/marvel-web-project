@@ -5,7 +5,7 @@
 <html>
 
 <body>
-  <c:import url="layout/navbar-logged.jsp"/>
+  <c:import url="layout/navbar.jsp"/>
   <div class="container">
     <h1 style="color: white;">Quiz Result</h1>
     
@@ -53,7 +53,7 @@
 
   </div>
 
-  <script type="text/javascript" src="/js/quizResult.js"></script>
+  <script type="module" src="/js/quizResult.js"></script>
 </body>
 
 </html>

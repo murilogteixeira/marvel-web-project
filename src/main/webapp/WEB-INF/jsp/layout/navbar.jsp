@@ -33,19 +33,19 @@
                     </a>
                 </li>
                 <li class="${activeTab == 'characters' ? 'active' : null}">
-                    <a class="nav-link" href="/characters?isLogged=false">
+                    <a class="nav-link" href="/characters">
                         <span class="glyphicon glyphicon-user"></span>
                         Characters
                     </a>
                 </li>
                 <li class="${activeTab == 'events' ? 'active' : null}">
-                    <a class="nav-link" href="/events?isLogged=false">
+                    <a class="nav-link" href="/events">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         Events
                     </a>
                 </li>
                 <li class="${activeTab == 'comics' ? 'active' : null}">
-                    <a class="nav-link" href="/comics?isLogged=false">
+                    <a class="nav-link" href="/comics">
                         <span class="glyphicon glyphicon-book"></span>
                         Comics
                     </a>
@@ -53,9 +53,15 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-right" class="${activeTab == 'login' ? 'active' : null}">
-                    <a class="nav-link" href="/login">
-                        <span class="glyphicon glyphicon-log-in"></span> 
-                        Login
+                    <c:if test="${username == null}">
+                        <a class="nav-link" href="/login">
+                    </c:if>
+                    <c:if test="${username != null}">
+                        <a class="nav-link" href="/logout">
+                    </c:if>
+                        <span class="glyphicon glyphicon-log-in"></span>
+                        <c:if test="${username == null}">Login</c:if>
+                        <c:if test="${username != null}">Logout</c:if>
                     </a>
                 </li>
             </ul>

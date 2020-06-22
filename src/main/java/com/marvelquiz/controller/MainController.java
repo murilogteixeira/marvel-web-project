@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.marvelquiz.backend.model.ApiResponse;
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
 import com.marvelquiz.backend.model.comics.DataReturnWithComic;
@@ -41,9 +43,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 public class MainController {
 
-    // @Autowired
-    // private PessoaService service;
-
     private String scheme = "https";
     private String host = "marvel-web-project.herokuapp.com";
     private int quizCount = 0;
@@ -54,54 +53,16 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/logged")
-    public String indexLogged(Map<String, Object> model) {
-        model.put("activeTab", "home");
-        return "index-logged";
-    }
-
     @RequestMapping("/login")
     public String login(Map<String, Object> model) {
         model.put("activeTab", "login");
         return "login-presentation";
     }
 
-    @RequestMapping(value = {"/home"}, method = RequestMethod.POST)
-    public String loginError(@RequestParam("user") String username, @RequestParam("senha") String password) {
-        User user = new User();
-        user.setPassword(password);
-        user.setUsername(username);
-
-        UriComponents uri = UriComponentsBuilder.newInstance()
-        .scheme("http").host("localhost").port(5000)     
-        .path("/api/login")
-        .build();
-
-        try {
-            RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-            map.add("username", user.getUsername());
-            map.add("password", user.getPassword());
-
-            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-
-
-            System.out.println("User: " + user.getUsername() + "Password: " + user.getPassword());
-
-            ResponseEntity<ApiResponse> responseEntity = restTemplate.postForEntity(uri.toString(), request, ApiResponse.class);
-
-            if (responseEntity.getStatusCode() == HttpStatus.OK) {
-                return "index-logged";
-            } else {
-                return "error-page";
-            }
-        } catch (RestClientException e) {
-            System.out.println(e.getLocalizedMessage());
-            return "error-page";
-        }
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest req) {
+        req.getSession().setAttribute("username", null);
+        return "redirect:/";
     }
 
     @RequestMapping("/register")
@@ -189,49 +150,24 @@ public class MainController {
         }
     }
 
-    // @RequestMapping("/db")
-    // public String getDB(Map<String, Object> model) {
-
-    //     List<Pessoa> lista = service.findAll();
-
-    //     if (lista != null && !lista.isEmpty()) {
-    //         List<String> output = new ArrayList<>();
-    //         for (Pessoa p : lista) {
-    //             output.add(p.toString());
-    //         }
-    //         model.put("records", output);
-    //         return "db";
-    //     } else
-    //         model.put("message", "No items found");
-    //     return "error";
-    // }
-
     final String characterRequestMapping = "/characters";
     @RequestMapping(characterRequestMapping)
-    public String chacarterPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
+    public String chacarterPresentation(Map<String, Object> model) {
         System.out.println("Request: " + characterRequestMapping);
         model.put("activeTab", "characters");
         ArrayList<Character> resultados = getCharacters(20, 1000);
         model.put("records", resultados);
-
-        System.out.println("isLogged: " + isLogged);
-
-        model.put("isLogged", isLogged);
         return "character-presentation";
     }
 
     final String comicsRequestMapping = "/comics";
     @RequestMapping(comicsRequestMapping)
-    public String comicsPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
+    public String comicsPresentation(Map<String, Object> model) {
         System.out.println("Request: " + comicsRequestMapping);
         model.put("activeTab", "comics");
         ArrayList<Comic> resultados = getComicsResults(20, 70000);
         ArrayList<String> creatorsArray = new ArrayList<String>();
         model.put("records", resultados);
-        
-        System.out.println("isLogged: " + isLogged);
-
-        model.put("isLogged", isLogged);
 
         for (Comic resultado : resultados) {
             ArrayList<Items> items = resultado.getCreators().getItems();
@@ -253,14 +189,11 @@ public class MainController {
 
     final String eventsRequestMapping = "/events";
     @RequestMapping(eventsRequestMapping)
-    public String eventPresentation(@RequestParam Boolean isLogged, Map<String, Object> model) {
+    public String eventPresentation(Map<String, Object> model) {
         System.out.println("Request: " + eventsRequestMapping);
         model.put("activeTab", "events");
         ArrayList<Event> resultados = getEventResults(10, 30);
         model.put("records", resultados);
-        System.out.println("isLogged: " + isLogged);
-
-        model.put("isLogged", isLogged);
         return "event-presentation";
     }
 

@@ -9,7 +9,7 @@
   <c:import url="layout/navbar.jsp"/>
   <br><br><br>
   <div class="container roundedCorners" style="background-color: brown; width: 50%;">
-    <form method="POST", action="/api/login" id="formLogin">
+    <form id="formLogin">
       <div class="divCenter">
         <h3 style="color: white;">Login</h3></br>
         <input type="text" name="username" id="username" class="roundedCornersText" required>
@@ -20,9 +20,9 @@
         <input type="password" name="password" id="password" class="roundedCornersText" required>
       </div><br><br><br>
       <!-- <div class="centerButtons"> -->
-      <a style="text-align: center; width: 160px;" class="btn btn-dark btnLoginCadastrar btn-dark" id="submitLogin">
+      <button type="submit" style="text-align: center; width: 160px;" class="btn btn-dark btnLoginCadastrar btn-dark" id="submitLogin">
         Logar
-      </a><br><br>
+      </button><br><br>
 
       <div class="divCenter">
         <a href="/register">

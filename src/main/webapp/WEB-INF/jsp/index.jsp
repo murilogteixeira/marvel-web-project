@@ -34,6 +34,19 @@
           </a>
         </div></br>
       </div>
+
+      <c:if test="${username != null}">
+        <div class="row justify-content-center" id="divQuiz">
+          <div class="col-6 text-center">
+            <a href="quiz">
+              <div class="cardHomeTitle">
+                <h1 style="color: black;">Quiz</h1>
+              </div>
+            </a>
+          </div>
+        </div>
+      </c:if>
+
     </div>
 
     <div class="cardHomeBottom">
@@ -60,6 +73,7 @@
     </footer>
 
   </div>
+  <script src="/js/index.js"></script>
 </body>
 
 </html>

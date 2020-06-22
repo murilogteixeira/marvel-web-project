@@ -1,14 +1,14 @@
 
-function request(method, url, data, callback) {
+function request(method, url, object, callback) {
     var ajax = new XMLHttpRequest();
 
     if (method === 'POST' || method === 'post') {
         ajax.open(method, url, true);
         // ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ajax.setRequestHeader("Content-Type", 'application/json; charset=UTF-8');
-        ajax.send(JSON.stringify(data));
+        ajax.send(JSON.stringify(object));
     } else if (method === 'GET' || method === 'get') {
-        const params = new URLSearchParams(data).toString();
+        const params = new URLSearchParams(object).toString();
         ajax.open(method, url + '/?' + params, true);
         ajax.send();
     }

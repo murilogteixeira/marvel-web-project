@@ -1,15 +1,18 @@
 import {request} from './http-request.js';
 
-$('#submitLogin').click(function (e) { // e.preventDefault();
+$('#submitLogin').on('click', function (e) { // e.preventDefault();
     var form = $('#formLogin')
 
-    var data = formToJson(form);
-    request('post', '/api/login', data, (value) => {
-        if (value != null) {
-            sessionStorage.setItem('username', value.username);
-            console.log(value);
-        }
-    });
+    var json = formToJson(form);
+
+    if(json.username && json.password) {
+        e.preventDefault();
+        request('post', '/api/login', JSON.stringify(json), (value) => {
+            if (value != null) {
+                window.location.href = '/';
+            }
+        });
+    }
 });
 
 function formToJson(form) {

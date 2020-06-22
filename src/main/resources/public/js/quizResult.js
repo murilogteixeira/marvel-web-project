@@ -1,4 +1,4 @@
-import request from './http-request.js';
+import {request} from './http-request.js';
 
 $(document).ready(function () {
     var scoreUser = parseInt(document.getElementById('scoreUser'));
@@ -26,8 +26,13 @@ $(document).ready(function () {
 
 function getUser(retorno) {
     const method = 'GET';
-    const url = 'https://marvel-web-project.herokuapp.com/api/user/username';
-    const params = new URLSearchParams({username: sessionStorage.getItem('username')}).toString();
+    const uri = 'https://marvel-web-project.herokuapp.com';
+    const path = '/api/user';
+    const url = uri + path;
+    const obj = {
+        username: sessionStorage.getItem('username')
+    }
+    const params = new URLSearchParams(obj).toString();
     const callback = (data) => {
         retorno(data)
     };

@@ -3,7 +3,7 @@ package com.marvelquiz.backend.controller;
 import java.sql.Timestamp;
 import java.util.Optional;
 
-import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.marvelquiz.backend.model.ApiResponse;
@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,7 +51,7 @@ public class LoginController {
     // }
 
     @RequestMapping(value = loginRequestMapping, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiResponse> login(@Valid @RequestBody User user) {
+    public ResponseEntity<ApiResponse> login(@Valid @RequestBody User user, HttpServletRequest req) {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         System.out.println(ts + " Request : " + loginRequestMapping);
 
@@ -65,6 +64,7 @@ public class LoginController {
             apiResponse.setStatus(status.value());
             apiResponse.setMessage("Usuário logado.");
             System.out.println(ts + " Status : " + status);
+            req.getSession().setAttribute("username", u.get().getUsername());
             return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
         } else {
             HttpStatus status = HttpStatus.UNAUTHORIZED;
