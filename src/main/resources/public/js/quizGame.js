@@ -1,3 +1,7 @@
+$(window).on('load', () => {
+    sessionStorage.setItem('sessaoQuizAtiva', true);
+});
+
 function verificarResposta(resposta, respostaCerta) {
     var respostaCorreta = false
     if (resposta == respostaCerta) {
