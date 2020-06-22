@@ -108,6 +108,44 @@ public class MainController {
         return "register-presentation";
     }
 
+    @RequestMapping(value = {"/signIn"}, method = RequestMethod.POST)
+    public String registerUser(@RequestParam("txtusername") String username, @RequestParam("txtpassword") String password) {
+        User user = new User();
+        user.setPassword(password);
+        user.setUsername(username);
+
+        UriComponents uri = UriComponentsBuilder.newInstance()
+        .scheme("http").host("localhost").port(5000)     
+        .path("/api/user")
+        .build();
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+            map.add("username", user.getUsername());
+            map.add("password", user.getPassword());
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+
+            System.out.println("User: " + user.getUsername() + "Password: " + user.getPassword());
+
+            ResponseEntity<User> userCreated = restTemplate.postForEntity(uri.toString(), request, User.class);
+
+            if (userCreated != null) {
+                return "login-presentation";
+            } else {
+                return "register-validation";
+            }
+        } catch (RestClientException e) {
+            System.out.println(e.getLocalizedMessage());
+            return "register-validation";
+        }
+    }
+
     // @RequestMapping("/db")
     // public String getDB(Map<String, Object> model) {
 

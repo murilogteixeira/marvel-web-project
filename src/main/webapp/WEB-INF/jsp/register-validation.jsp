@@ -9,12 +9,12 @@
   <c:import url="layout/navbar.jsp"/>
   <br><br><br>
   <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
-    <h2 style="color:  #E6E6E6; text-align: center;">Something when wrong</h2>
-    <h4 style="color:  #E6E6E6; text-align: center;">Please Login again...</h4>
+    <h2 style="color:  #E6E6E6; text-align: center;">Error to Register</h2>
+    <h4 style="color:  #E6E6E6; text-align: center;">Please Register again...</h4>
     
     <br><br>
-    <a href="/login">
-        <button style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">Login</button>
+    <a href="/register">
+        <button style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">Register</button>
     </a>
     <br><br>
   </div>

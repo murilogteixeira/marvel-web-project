@@ -13,12 +13,12 @@
       <div class="divCenter">
         <h3 style="color: white;">Login</h1>
         </h3></br>
-        <input type="text" name="username" class="roundedCornersText">
+        <input type="text" name="user" class="roundedCornersText">
       </div></br>
       <div class="divCenter">
         <h3 style="color: white;">Senha</h1>
         </h3></br>
-        <input type="password" name="password" class="roundedCornersText">
+        <input type="password" name="senha" class="roundedCornersText">
       </div><br><br>
       <!-- <div class="centerButtons"> -->
       <button type="submit" style="text-align: center; " class="btn btn-dark btnLoginCadastrar btn-dark">

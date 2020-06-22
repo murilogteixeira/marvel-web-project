@@ -12,16 +12,16 @@
   <h1 style="color: white;"> Register</h1>
   <br><br>
   <div class="container roundedCorners" style="align-items: center; background-color: brown; width: 50%;">
-    <form method="POST" action="/">
+    <form method="POST" action="/signIn">
       <div class="divCenter">
         <h3 style="color: white;">Login</h1>
         </h3></br>
-        <input type="text" name="txtLogin" class="roundedCornersText">
+        <input type="text" name="txtusername" class="roundedCornersText">
       </div></br>
       <div class="divCenter">
         <h3 style="color: white;">Senha</h1>
         </h3></br>
-        <input type="password" name="txtSenha" class="roundedCornersText">
+        <input type="password" name="txtpassword" class="roundedCornersText">
       </div><br><br>
       <!-- <div class="centerButtons"> -->
       <button type="submit" style="text-align: center;" class="btn btn-dark btnLoginCadastrar btn-dark">

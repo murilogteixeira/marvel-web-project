@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,7 +39,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/api/user", method = RequestMethod.POST)
-    public User save(@Valid @RequestBody User user) {
+    public User save(@Valid @RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+        User user = new User();
+        user.setPassword(password);
+        user.setUsername(username);
         return service.save(user);
     }
 
