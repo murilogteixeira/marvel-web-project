@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.marvelquiz.backend.model.ApiResponse;
 import com.marvelquiz.backend.model.character.DataReturnWithCharacter;
@@ -198,7 +199,11 @@ public class MainController {
     }
 
     @RequestMapping("/quiz")
-    public String quizPresentation(Map<String, Object> model){
+    public String quizPresentation(Map<String, Object> model, HttpServletRequest req){
+
+        if(req.getSession().getAttribute("username") == null) {
+            return "redirect:/login";
+        }
         
         if (quizCount == 8) {
             quizCount = 0;

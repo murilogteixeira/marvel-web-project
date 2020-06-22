@@ -5,9 +5,10 @@ $('#submitLogin').on('click', function (e) { // e.preventDefault();
 
     var json = formToJson(form);
 
+    console.log(json);
     if(json.username && json.password) {
         e.preventDefault();
-        request('post', '/api/login', JSON.stringify(json), (value) => {
+        request('post', '/api/login', json, (value) => {
             if (value != null) {
                 window.location.href = '/';
             }

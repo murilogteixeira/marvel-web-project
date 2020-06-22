@@ -3,28 +3,41 @@
 
 <!DOCTYPE html>
 <html>
-
 <body>
   <c:import url="layout/navbar.jsp"/>
+
+  <script>
+    var sessionQuizAtiva = sessionStorage.getItem('sessaoQuizAtiva');
+    console.log(sessionQuizAtiva);
+    if(!sessionQuizAtiva) {
+        window.location.href = '/quiz';
+    }
+  </script>
+  
   <div class="container">
     <h1 style="color: white;">Quiz Result</h1>
     
     </br>
 
+    <%
+    String username = (String) session.getAttribute("username");
+    %>
+
+   <input type="hidden" id="username" value="<%=username%>">
    <input type="hidden" id="scoreUser" value="${user.score}">
 
     <h3 style="color: #f2ea46;"> Score: </h3>
-    <h3 style="color: #E6E6E6;" id="score">50</h3>
+    <h3 style="color: #E6E6E6;" id="score"></h3>
 
     <br>
 
     <h3 style="color: #E6E6E6;"> Right Answers: </h3>
-    <h3 style="color: green;" id="rightAnswers">50%</h3>
+    <h3 style="color: green;" id="rightAnswers"></h3>
 
     <br>
 
     <h3 style="color: #E6E6E6;"> Wrong Answers: </h3>
-    <h3 style="color: red" id="wrongAnswers">50%</h3>
+    <h3 style="color: red" id="wrongAnswers"></h3>
     
     <div class="cardHomeBottom">
       <div class="row">
@@ -52,7 +65,6 @@
   </footer>
 
   </div>
-
   <script type="module" src="/js/quizResult.js"></script>
 </body>
 
