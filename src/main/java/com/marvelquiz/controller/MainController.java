@@ -1,4 +1,4 @@
-package com.marvelquiz;
+package com.marvelquiz.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

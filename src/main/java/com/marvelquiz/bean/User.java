@@ -19,6 +19,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private int score;
+
+    @Column(nullable = false)
+    private int rightAnswerPercent;
+
+    @Column(nullable = false)
+    private int wrongAnswerPercent;
+
     public long getId() {
         return id;
     }
@@ -41,6 +50,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getRightAnswerPercent() {
+        return rightAnswerPercent;
+    }
+
+    public void setRightAnswerPercent(int rightAnswerPercent) {
+        this.rightAnswerPercent = rightAnswerPercent;
+    }
+
+    public int getWrongAnswerPercent() {
+        return rightAnswerPercent;
+    }
+
+    public void setWrongAnswerPercent(int wrongAnswerPercent) {
+        this.wrongAnswerPercent = wrongAnswerPercent;
     }
 
     @Override
