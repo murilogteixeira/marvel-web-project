@@ -5,7 +5,7 @@
 <html>
 
 <body>
-  <c:import url="layout/navbar.jsp" />
+  <c:import url="layout/navbar-logged.jsp" />
 
   <div class="container">
     <h1 style="color: white;">MARVEL Comics Super Fans</h1></br>
@@ -34,6 +34,17 @@
           </a>
         </div></br>
       </div>
+
+      <div class="row justify-content-center">
+        <div class="col-6 text-center">
+          <a href="quiz">
+            <div class="cardHomeTitle">
+              <h1 style="color: black;">Quiz</h1>
+            </div>
+          </a>
+        </div>
+      </div>
+
     </div>
 
     <div class="cardHomeBottom">
