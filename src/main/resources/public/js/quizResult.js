@@ -30,9 +30,9 @@ $(document).ready(function () {
 
             sessionStorage.setItem('perguntas', 0);
             sessionStorage.setItem('acertos', 0);
-            console.log(user);
             saveUser(user, (data) => {
-                console.log(data);
+                console.log('user: ' + user);
+                console.log('api response: ' + data);
             })
         }
     });
