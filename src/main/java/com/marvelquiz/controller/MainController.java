@@ -292,16 +292,16 @@ public class MainController {
         String pergunta = perguntas.getTitlePeriodoEvento();
 
         ArrayList<Event> events = getEventResults(10, 30);
-        String respostaCerta = "" + events.get(0).getStart() + " - " + events.get(0).getEnd(); 
+        String respostaCerta = "From " + events.get(0).getStart().substring(0, 10) + " To " + events.get(0).getEnd().substring(0, 10); 
 
         String conteudo = events.get(0).getTitle();
         boolean conteudoIsImage = false;
 
         String respostasFixa[] = new String[] {
-            "" + events.get(0).getStart() + " - " + events.get(0).getEnd(),
-            "" + events.get(1).getStart() + " - " + events.get(1).getEnd(),
-            "" + events.get(2).getStart() + " - " + events.get(2).getEnd(),
-            "" + events.get(3).getStart() + " - " + events.get(3).getEnd()
+            "From " + events.get(0).getStart().substring(0, 10) + " To " + events.get(0).getEnd().substring(0, 10),
+            "From " + events.get(1).getStart().substring(0, 10) + " To " + events.get(1).getEnd().substring(0, 10),
+            "From " + events.get(2).getStart().substring(0, 10) + " To " + events.get(2).getEnd().substring(0, 10),
+            "From " + events.get(3).getStart().substring(0, 10) + " To " + events.get(3).getEnd().substring(0, 10)
         };
 
         String[] respostas = randomArray(respostasFixa);
@@ -367,16 +367,16 @@ public class MainController {
         String pergunta = perguntas.getImagemComecoEvento();
 
         ArrayList<Event> events = getEventResults(10, 20);
-        String respostaCerta = "" + events.get(0).getStart();
+        String respostaCerta = "" + events.get(0).getStart().substring(0, 10);
 
         String conteudo = "" + events.get(0).getThumbnail().getPath() + "/portrait_incredible." + events.get(0).getThumbnail().getExtension();
         boolean conteudoIsImage = true;
 
         String respostasFixa[] = new String[] {
-            "" + events.get(0).getStart(),
-            "" + events.get(1).getStart(),
-            "" + events.get(2).getStart(),
-            "" + events.get(3).getStart()
+            "" + events.get(0).getStart().substring(0, 10),
+            "" + events.get(1).getStart().substring(0, 10),
+            "" + events.get(2).getStart().substring(0, 10),
+            "" + events.get(3).getStart().substring(0, 10)
         };
 
         String[] respostas = randomArray(respostasFixa);
@@ -392,16 +392,16 @@ public class MainController {
         String pergunta = perguntas.getDescricaoFinalEvento();
 
         ArrayList<Event> events = getEventResults(4, 90);
-        String respostaCerta = "" + events.get(0).getEnd();
+        String respostaCerta = "" + events.get(0).getEnd().substring(0, 10);
 
         String conteudo = "" + events.get(0).getDescription();
         boolean conteudoIsImage = false;
 
         String respostasFixa[] = new String[] {
-            "" + events.get(0).getEnd(),
-            "" + events.get(1).getEnd(),
-            "" + events.get(2).getEnd(),
-            "" + events.get(3).getEnd()
+            "" + events.get(0).getEnd().substring(0, 10),
+            "" + events.get(1).getEnd().substring(0, 10),
+            "" + events.get(2).getEnd().substring(0, 10),
+            "" + events.get(3).getEnd().substring(0, 10)
         };
 
         String[] respostas = randomArray(respostasFixa);

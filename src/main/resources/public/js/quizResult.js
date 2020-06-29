@@ -13,8 +13,8 @@ $(document).ready(function () {
     var acertosPercentual = acertos / perguntas * 100;
     var errosPercentual = erros / perguntas * 100;
 
-    rightAnswers.innerHTML = acertosPercentual + '%';
-    wrongAnswers.innerHTML = errosPercentual + '%';
+    rightAnswers.innerHTML = acertosPercentual.toPrecision(2) + '%';
+    wrongAnswers.innerHTML = errosPercentual.toPrecision(2) + '%';
 
     scoreUser = isNaN(scoreUser) ? acertos : scoreUser += acertos;
 
